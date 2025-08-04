@@ -5,5 +5,7 @@
         public string? Bio { get; set; }
 
         public ICollection<FreelancerSkill> Skills { get; set; }
+        public ICollection<Proposal> Proposals { get; set; }
+
     }
 }

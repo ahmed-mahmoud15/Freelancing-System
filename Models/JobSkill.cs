@@ -2,15 +2,15 @@
 
 namespace FreelancingSystem.Models
 {
-    public class JobCategory
+    public class JobSkill
     {
         [ForeignKey(nameof(Job))]
         public int JobId { get; set; }
-        [ForeignKey(nameof(Category))]
-        public int CategoryId { get; set; }
+        [ForeignKey(nameof(Skill))]
+        public int SkillId { get; set; }
 
         public Job Job { get; set; }
 
-        public Category Category { get; set; }
+        public Skill Skill { get; set; }
     }
 }

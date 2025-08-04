@@ -1,11 +1,10 @@
 ﻿namespace FreelancingSystem.Models
 {
-    public class Category
-    { 
+    public class Tag
+    {
         public int Id { get; set; }
         public string Name { get; set; }
-
-        public ICollection<JobCategory> Jobs { get; set; }
+        public ICollection<JobTag> Jobs { get; set; }
 
     }
 }

@@ -12,5 +12,6 @@ namespace FreelancingSystem.Models
         public Freelancer Freelancer { get; set; }
 
         public Skill Skill { get; set; }
+
     }
 }
