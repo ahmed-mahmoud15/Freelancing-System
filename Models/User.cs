@@ -19,5 +19,9 @@ namespace FreelancingSystem.Models
         public Guid IdentityId { get; set; }
 
         public IdentityUser IdentityUser { get; set; }
+        public ICollection<Rating> ReviewerRatings { get; set; }
+        public ICollection<Rating> RevieweeRatings { get; set; }
+
+
     }
 }
