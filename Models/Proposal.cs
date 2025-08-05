@@ -1,4 +1,6 @@
-﻿namespace FreelancingSystem.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace FreelancingSystem.Models
 {
     public class Proposal
     {
