@@ -11,7 +11,7 @@ namespace FreelancingSystem.Models
         public User Reviewer { get; set; }
         [ForeignKey(nameof(RevieweeId))]
         public User Reviewee { get; set; }
-        public int rate { get; set; }
+        public int Rate { get; set; }
 
 
     }

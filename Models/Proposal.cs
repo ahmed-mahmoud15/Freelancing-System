@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FreelancingSystem.Models
 {
@@ -9,12 +10,13 @@ namespace FreelancingSystem.Models
         [ForeignKey(nameof(Freelancer))]
         public int FreelancerId { get; set; }
 
-        public DateTime date { get; set; }
+        [Required]
         public string CoverLetter { get; set; }
-        public int bid {  get; set; }
+
+        public DateTime Date { get; set; }
+        public int Bid {  get; set; }
         public DateTime TimeLine { get; set; }
-        public string PaymentMethod { get; set; }
-        public string Status { get; set; }
+        public Status Status { get; set; }
         
         public Freelancer Freelancer { get; set; }
         public Job Job { get; set; }

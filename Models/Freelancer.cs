@@ -4,8 +4,8 @@
     {
         public string? Bio { get; set; }
 
-        public ICollection<FreelancerSkill> Skills { get; set; }
-        public ICollection<Proposal> Proposals { get; set; }
+        public ICollection<FreelancerSkill> Skills { get; set; } = new List<FreelancerSkill>();
+        public ICollection<Proposal> Proposals { get; set; } = new List<Proposal>();
 
     }
 }

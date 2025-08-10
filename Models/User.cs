@@ -16,12 +16,8 @@ namespace FreelancingSystem.Models
         public string? ProfileImagePath { get; set; }
 
         [ForeignKey(nameof(IdentityUser))]
-        public Guid IdentityId { get; set; }
+        public string IdentityId { get; set; }
 
         public IdentityUser IdentityUser { get; set; }
-        public ICollection<Rating> ReviewerRatings { get; set; }
-        public ICollection<Rating> RevieweeRatings { get; set; }
-
-
     }
 }
