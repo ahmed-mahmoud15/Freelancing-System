@@ -7,6 +7,6 @@
         void Insert(T record);
         void Update(T record);
         void Delete(object id);
-        void SaveAsync();
+        void Save();
     }
 }

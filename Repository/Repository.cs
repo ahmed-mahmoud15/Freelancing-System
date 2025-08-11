@@ -6,7 +6,7 @@ namespace FreelancingSystem.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly ApplicationDbContext context;
+        protected readonly ApplicationDbContext context;
         protected readonly DbSet<T> table;
 
         public Repository(ApplicationDbContext context)
@@ -39,15 +39,14 @@ namespace FreelancingSystem.Repository
             table.Add(record);
         }
 
-        public void SaveAsync()
+        public void Save()
         {
             context.SaveChanges();
         }
 
         public void Update(T record)
         {
-            table.Attach(record);
-            context.Entry(record).State = EntityState.Modified;
+            table.Update(record);
         }
     }
 }

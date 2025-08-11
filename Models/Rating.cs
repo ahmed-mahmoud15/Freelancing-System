@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FreelancingSystem.Models
 {
@@ -11,9 +12,9 @@ namespace FreelancingSystem.Models
         public User Reviewer { get; set; }
         [ForeignKey(nameof(RevieweeId))]
         public User Reviewee { get; set; }
+
+        [Range(1, 5)]
         public int Rate { get; set; }
-
-
     }
 
 }
