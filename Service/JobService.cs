@@ -51,7 +51,7 @@ namespace FreelancingSystem.Service
         public IEnumerable<JobCategory> GetJobCategoriesForJob(int jobId)
         {
             var job = jobRepository.GetById(jobId);
-            return job?.JobCategories ?? Enumerable.Empty<JobCategory>();
+            return job?.Categories ?? Enumerable.Empty<JobCategory>();
         }
 
         public void AssignJobCategoryToJob(int jobId, int categoryId)
@@ -59,9 +59,9 @@ namespace FreelancingSystem.Service
             var job = jobRepository.GetById(jobId);
             var category = jobCategoryService.GetJobCategoryById(categoryId);
 
-            if (job != null && category != null && !job.JobCategories.Contains(category))
+            if (job != null && category != null && !job.Categories.Contains(category))
             {
-                job.JobCategories.Add(category);
+                job.Categories.Add(category);
                 jobRepository.Update(job);
             }
         }
@@ -69,11 +69,11 @@ namespace FreelancingSystem.Service
         public void RemoveJobCategoryFromJob(int jobId, int categoryId)
         {
             var job = jobRepository.GetById(jobId);
-            var category = job?.JobCategories.FirstOrDefault(c => c.Id == categoryId);
+            var category = job?.Categories.FirstOrDefault(c => c.Id == categoryId);
 
             if (job != null && category != null)
             {
-                job.JobCategories.Remove(category);
+                job.Categories.Remove(category);
                 jobRepository.Update(job);
             }
         }
@@ -82,7 +82,7 @@ namespace FreelancingSystem.Service
         public IEnumerable<JobSkill> GetJobSkillsForJob(int jobId)
         {
             var job = jobRepository.GetById(jobId);
-            return job?.JobSkills ?? Enumerable.Empty<JobSkill>();
+            return job?.Skills ?? Enumerable.Empty<JobSkill>();
         }
 
         public void AssignJobSkillToJob(int jobId, int skillId)
@@ -90,9 +90,9 @@ namespace FreelancingSystem.Service
             var job = jobRepository.GetById(jobId);
             var skill = jobSkillService.GetJobSkillById(skillId);
 
-            if (job != null && skill != null && !job.JobSkills.Contains(skill))
+            if (job != null && skill != null && !job.Skills.Contains(skill))
             {
-                job.JobSkills.Add(skill);
+                job.Skills.Add(skill);
                 jobRepository.Update(job);
             }
         }
@@ -100,11 +100,11 @@ namespace FreelancingSystem.Service
         public void RemoveJobSkillFromJob(int jobId, int skillId)
         {
             var job = jobRepository.GetById(jobId);
-            var skill = job?.JobSkills.FirstOrDefault(s => s.Id == skillId);
+            var skill = job?.Skills.FirstOrDefault(s => s.Id == skillId);
 
             if (job != null && skill != null)
             {
-                job.JobSkills.Remove(skill);
+                job.Skills.Remove(skill);
                 jobRepository.Update(job);
             }
         }
