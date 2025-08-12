@@ -1,10 +1,15 @@
-﻿
-using FreelancingSystem.Models;
+﻿using FreelancingSystem.Models;
+using System.Collections.Generic;
 
 namespace FreelancingSystem.Repository
 {
-    public interface IJobSkillRepository : IRepository<JobSkill>
+    public interface IJobSkillRepository
     {
-        JobSkill GetJobSkillByIdentityId(string id);
+        IEnumerable<JobSkill> GetAll();
+        JobSkill GetByIds(int jobId, int skillId);
+        void Insert(JobSkill jobSkill);
+        void Update(JobSkill jobSkill);
+        void Delete(int jobId, int skillId);
+        void Save();
     }
 }

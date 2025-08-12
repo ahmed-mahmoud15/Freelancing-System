@@ -1,44 +1,41 @@
 ﻿using FreelancingSystem.Models;
 using FreelancingSystem.Repository;
+using System.Collections.Generic;
 
 namespace FreelancingSystem.Service
 {
-
     public class JobSkillService : IJobSkillService
     {
-        private readonly IJobSkillRepository jobSkillRepository;
+        private readonly IJobSkillRepository _jobSkillRepository;
 
         public JobSkillService(IJobSkillRepository jobSkillRepository)
         {
-            this.jobSkillRepository = jobSkillRepository;
-        }
-
-        public void AddJobSkill(JobSkill jobskill)
-        {
-            jobSkillRepository.Insert(jobskill);
-            jobSkillRepository.Save();
-        }
-
-        public void DeleteJobSkill(int id)
-        {
-            jobSkillRepository.Delete(id);
-            jobSkillRepository.Save();
+            _jobSkillRepository = jobSkillRepository;
         }
 
         public IEnumerable<JobSkill> GetAllJobSkills()
         {
-            return jobSkillRepository.GetAll();
+            return _jobSkillRepository.GetAll();
         }
 
-        public JobSkill GetJobSkillById(int id)
+        public JobSkill GetJobSkillByIds(int jobId, int skillId)
         {
-            return jobSkillRepository.GetById(id);
+            return _jobSkillRepository.GetByIds(jobId, skillId);
         }
 
-        public void UpdateJobSkill(JobSkill jobskill)
+        public void CreateJobSkill(JobSkill jobSkill)
         {
-            jobSkillRepository.Update(jobskill);
-            jobSkillRepository.Save();
+            _jobSkillRepository.Insert(jobSkill);
+        }
+
+        public void UpdateJobSkill(JobSkill jobSkill)
+        {
+            _jobSkillRepository.Update(jobSkill);
+        }
+
+        public void DeleteJobSkill(int jobId, int skillId)
+        {
+            _jobSkillRepository.Delete(jobId, skillId);
         }
     }
 }

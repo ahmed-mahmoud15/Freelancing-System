@@ -8,5 +8,7 @@ namespace FreelancingSystem.Models
         [StringLength(50)]
         public string CompanyName { get; set; }
 
+        public ICollection<Job> Jobs { get; set; } = new List<Job>();
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc;
 namespace FreelancingSystem.Models
 {
@@ -7,6 +8,9 @@ namespace FreelancingSystem.Models
     {
         [Key]
         public int Id { get; set; }
+        [ForeignKey(nameof(Client))]
+        public int ClientId { get; set; }
+
         [Required]
         public string Title { get; set; }
         public string? Description { get; set; }
@@ -19,6 +23,8 @@ namespace FreelancingSystem.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public DateTime? Deadline { get; set; }
+
+        public Freelancer Freelancer { get; set; }
 
         public ICollection<JobSkill> Skills { get; set; } = new List<JobSkill>();
 
