@@ -15,30 +15,30 @@ namespace FreelancingSystem.Service
 
         public void AddJobSkill(JobSkill jobskill)
         {
-            jobskillRepository.Insert(jobskill);
-            jobskillRepository.Save();
+            jobSkillRepository.Insert(jobskill);
+            jobSkillRepository.Save();
         }
 
         public void DeleteJobSkill(int id)
         {
-            jobskillRepository.Delete(id);
-            jobskillRepository.Save();
+            jobSkillRepository.Delete(id);
+            jobSkillRepository.Save();
         }
 
         public IEnumerable<JobSkill> GetAllJobSkills()
         {
-            return jobskillRepository.GetAll();
+            return jobSkillRepository.GetAll();
         }
 
         public JobSkill GetJobSkillById(int id)
         {
-            return jobskillRepository.GetById(id);
+            return jobSkillRepository.GetById(id);
         }
 
         public void UpdateJobSkill(JobSkill jobskill)
         {
-            jobskillRepository.Update(jobskill);
-            jobskillRepository.Save();
+            jobSkillRepository.Update(jobskill);
+            jobSkillRepository.Save();
         }
     }
 }
