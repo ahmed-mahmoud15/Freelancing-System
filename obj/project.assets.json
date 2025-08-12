@@ -8461,23 +8461,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\LP\\.nuget\\packages\\": {},
+    "C:\\Users\\p c\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\freelancer\\FreelancingSystem.csproj",
+      "projectUniqueName": "C:\\Users\\p c\\source\\repos\\FreelancingSystem\\FreelancingSystem\\FreelancingSystem.csproj",
       "projectName": "FreelancingSystem",
-      "projectPath": "D:\\freelancer\\FreelancingSystem.csproj",
-      "packagesPath": "C:\\Users\\LP\\.nuget\\packages\\",
-      "outputPath": "D:\\freelancer\\obj\\",
+      "projectPath": "C:\\Users\\p c\\source\\repos\\FreelancingSystem\\FreelancingSystem\\FreelancingSystem.csproj",
+      "packagesPath": "C:\\Users\\p c\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\p c\\source\\repos\\FreelancingSystem\\FreelancingSystem\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\LP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\p c\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

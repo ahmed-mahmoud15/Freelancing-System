@@ -433,17 +433,6 @@ C:\Users\GF\Source\Repos\Freelancing-System\obj\Debug\net9.0\refint\FreelancingS
 C:\Users\GF\Source\Repos\Freelancing-System\obj\Debug\net9.0\FreelancingSystem.pdb
 C:\Users\GF\Source\Repos\Freelancing-System\obj\Debug\net9.0\FreelancingSystem.genruntimeconfig.cache
 C:\Users\GF\Source\Repos\Freelancing-System\obj\Debug\net9.0\ref\FreelancingSystem.dll
-C:\Users\p c\source\repos\FreelancingSystem\FreelancingSystem\obj\Debug\net9.0\FreelancingSystem.csproj.AssemblyReference.cache
-C:\Users\p c\source\repos\FreelancingSystem\FreelancingSystem\obj\Debug\net9.0\rpswa.dswa.cache.json
-C:\Users\p c\source\repos\FreelancingSystem\FreelancingSystem\obj\Debug\net9.0\FreelancingSystem.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\p c\source\repos\FreelancingSystem\FreelancingSystem\obj\Debug\net9.0\FreelancingSystem.AssemblyInfoInputs.cache
-C:\Users\p c\source\repos\FreelancingSystem\FreelancingSystem\obj\Debug\net9.0\FreelancingSystem.AssemblyInfo.cs
-C:\Users\p c\source\repos\FreelancingSystem\FreelancingSystem\obj\Debug\net9.0\FreelancingSystem.csproj.CoreCompileInputs.cache
-C:\Users\p c\source\repos\FreelancingSystem\FreelancingSystem\obj\Debug\net9.0\FreelancingSystem.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\p c\source\repos\FreelancingSystem\FreelancingSystem\obj\Debug\net9.0\FreelancingSystem.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\p c\source\repos\FreelancingSystem\FreelancingSystem\obj\Debug\net9.0\FreelancingSystem.RazorAssemblyInfo.cache
-C:\Users\p c\source\repos\FreelancingSystem\FreelancingSystem\obj\Debug\net9.0\FreelancingSystem.RazorAssemblyInfo.cs
-C:\Users\p c\source\repos\FreelancingSystem\FreelancingSystem\obj\Debug\net9.0\FreelancingSystem.sourcelink.json
 D:\freelancer\obj\Debug\net9.0\FreelancingSystem.csproj.AssemblyReference.cache
 D:\freelancer\obj\Debug\net9.0\rpswa.dswa.cache.json
 D:\freelancer\obj\Debug\net9.0\FreelancingSystem.GeneratedMSBuildEditorConfig.editorconfig
