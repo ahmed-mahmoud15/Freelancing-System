@@ -15,30 +15,35 @@ namespace FreelancingSystem.Service
 
         public void AddJobCategory(JobCategory jobcategory)
         {
-            jobcategoryRepository.Insert(jobcategory);
-            jobcategoryRepository.Save();
+            jobCategoryRepository.Insert(jobcategory);
+            jobCategoryRepository.Save();
         }
 
         public void DeleteJobCategory(int id)
         {
-            jobcategoryRepository.Delete(id);
-            jobcategoryRepository.Save();
+            jobCategoryRepository.Delete(id);
+            jobCategoryRepository.Save();
+        }
+
+        public IEnumerable<JobCategory> GetAllJobCategories()
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<JobCategory> GetAllJobCategorys()
         {
-            return jobcategoryRepository.GetAll();
+            return jobCategoryRepository.GetAll();
         }
 
         public JobCategory GetJobCategoryById(int id)
         {
-            return jobcategoryRepository.GetById(id);
+            return jobCategoryRepository.GetById(id);
         }
 
         public void UpdateJobCategory(JobCategory jobcategory)
         {
-            jobcategoryRepository.Update(jobcategory);
-            jobcategoryRepository.Save();
+            jobCategoryRepository.Update(jobcategory);
+            jobCategoryRepository.Save();
         }
 
     }
