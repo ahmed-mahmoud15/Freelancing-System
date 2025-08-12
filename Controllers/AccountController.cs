@@ -8,11 +8,11 @@ namespace FreelancingSystem.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUserService userService;
+        private readonly IAccountService _accountService;
 
-        public AccountController(IUserService userService)
+        public AccountController(IAccountService accountService)
         {
-            this.userService = userService;
+            _accountService = accountService;
         }
 
         [HttpGet]
@@ -22,70 +22,28 @@ namespace FreelancingSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(
-            RegisterViewModel model,
-            [FromServices] UserManager<IdentityUser> userManager,
-            [FromServices] RoleManager<IdentityRole> roleManager
-            )
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(model);
+
+            string? identityId = HttpContext.Session.GetString("user_id");
+            if (string.IsNullOrEmpty(identityId))
             {
-                User user = new User()
-                {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    ProfileImagePath = model.PhotoPath,
-                    IdentityId = HttpContext.Session.GetString("user_id")
-                };
-                userService.AddUser(user);
-
-                var identityUser = await userManager.FindByIdAsync(user.IdentityId);
-
-                if(model.Role == RoleViewModel.Client)
-                {
-                    if (!await roleManager.RoleExistsAsync("Client"))
-                    {
-                        await roleManager.CreateAsync(new IdentityRole("Client"));
-                    }
-                    Client client = new Client()
-                    {
-                        CompanyName = model.ClientCompanyName,
-                        Id = user.Id
-                    };
-
-                    // clientService.AddClient(client);
-
-                    var result = await userManager.AddToRoleAsync(identityUser, "Client");
-
-                    if (result.Succeeded)
-                    {
-                        return RedirectToAction(); // client dashboard
-                    }
-
-                }
-                else if(model.Role == RoleViewModel.Freelancer)
-                {
-                    if (!await roleManager.RoleExistsAsync("Freelancer"))
-                    {
-                        await roleManager.CreateAsync(new IdentityRole("Freelancer"));
-                    }
-
-                    Freelancer freelancer = new Freelancer()
-                    {
-                        Bio = model.FreelancerBio,
-                        Id = user.Id
-                    };
-
-                    // freelancerService.AddFreelancer(freelancer);
-
-                    var result = await userManager.AddToRoleAsync(identityUser, "Freelancer");
-
-                    if (result.Succeeded)
-                    {
-                        return RedirectToAction("Index","Home"); // freelancer dashboard
-                    }
-                }
+                ModelState.AddModelError("", "Session expired. Please log in again.");
+                return View(model);
             }
+
+            bool success = await _accountService.RegisterAccountAsync(model, identityId);
+
+            if (success)
+            {
+                return model.Role == RoleViewModel.Client
+                    ? RedirectToAction("Dashboard", "Client")
+                    : RedirectToAction("Index", "Home");
+            }
+
+            ModelState.AddModelError("", "Registration failed.");
             return View(model);
         }
     }
