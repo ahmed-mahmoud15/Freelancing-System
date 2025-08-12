@@ -7,5 +7,6 @@ namespace FreelancingSystem.Models
         [Required]
         [StringLength(50)]
         public string CompanyName { get; set; }
+
     }
 }
