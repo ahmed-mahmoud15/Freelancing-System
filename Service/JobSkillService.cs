@@ -6,26 +6,39 @@ namespace FreelancingSystem.Service
 
     public class JobSkillService : IJobSkillService
     {
-        private readonly IJobSkillRepository _jobSkillRepository;
+        private readonly IJobSkillRepository jobSkillRepository;
 
         public JobSkillService(IJobSkillRepository jobSkillRepository)
         {
-            _jobSkillRepository = jobSkillRepository;
+            this.jobSkillRepository = jobSkillRepository;
+        }
+
+        public void AddJobSkill(JobSkill jobskill)
+        {
+            jobskillRepository.Insert(jobskill);
+            jobskillRepository.Save();
+        }
+
+        public void DeleteJobSkill(int id)
+        {
+            jobskillRepository.Delete(id);
+            jobskillRepository.Save();
         }
 
         public IEnumerable<JobSkill> GetAllJobSkills()
-            => _jobSkillRepository.GetAll();
+        {
+            return jobskillRepository.GetAll();
+        }
 
         public JobSkill GetJobSkillById(int id)
-            => _jobSkillRepository.GetById(id);
+        {
+            return jobskillRepository.GetById(id);
+        }
 
-        public void AddJobSkill(JobSkill skill)
-            => _jobSkillRepository.Add(skill);
-
-        public void UpdateJobSkill(JobSkill skill)
-            => _jobSkillRepository.Update(skill);
-
-        public void DeleteJobSkill(int id)
-            => _jobSkillRepository.Delete(id);
+        public void UpdateJobSkill(JobSkill jobskill)
+        {
+            jobskillRepository.Update(jobskill);
+            jobskillRepository.Save();
+        }
     }
 }

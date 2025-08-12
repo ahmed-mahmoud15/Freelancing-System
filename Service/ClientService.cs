@@ -5,106 +5,55 @@ namespace FreelancingSystem.Service
 {
     public class ClientService : IClientService
     {
-        private readonly IClientRepository _clientRepository;
-        private readonly IJobCategoryService _jobCategoryService;
-        private readonly IJobSkillService _jobSkillService;
+        private readonly IClientRepository clientRepository;
 
-        public ClientService(
-            IClientRepository clientRepository,
-            IJobCategoryService jobCategoryService,
-            IJobSkillService jobSkillService)
+        public ClientService(IClientRepository clientRepository)
         {
-            _clientRepository = clientRepository;
-            _jobCategoryService = jobCategoryService;
-            _jobSkillService = jobSkillService;
+            this.clientRepository = clientRepository;
         }
 
         // ---------------- Client CRUD ----------------
-        public IEnumerable<Client> GetAllClients() => _clientRepository.GetAll();
-
-        public Client GetClientById(int id) => _clientRepository.GetById(id);
-
-        public Client GetClientByIdentity(string id) => _clientRepository.GetClientByIdentityId(id);
-
-        public void AddClient(Client client) => _clientRepository.Add(client);
-
-        public void UpdateClient(Client client) => _clientRepository.Update(client);
-
-        public void DeleteClient(int id) => _clientRepository.Delete(id);
-
-        // ---------------- Job Categories ----------------
-        public IEnumerable<JobCategory> GetJobCategoriesForClient(int clientId)
+        public void AddClient(Client client)
         {
-            var client = _clientRepository.GetById(clientId);
-            return client?.JobCategories ?? Enumerable.Empty<JobCategory>();
+            clientRepository.Insert(client);
+            clientRepository.Save();
         }
 
-        public void AssignJobCategoryToClient(int clientId, int categoryId)
+        public void DeleteClient(int id)
         {
-            var client = _clientRepository.GetById(clientId);
-            var category = _jobCategoryService.GetJobCategoryById(categoryId);
-
-            if (client != null && category != null && !client.JobCategories.Contains(category))
-            {
-                client.JobCategories.Add(category);
-                _clientRepository.Update(client);
-            }
+            clientRepository.Delete(id);
+            clientRepository.Save();
         }
 
-        public void RemoveJobCategoryFromClient(int clientId, int categoryId)
+        public IEnumerable<Client> GetAllClients()
         {
-            var client = _clientRepository.GetById(clientId);
-            var category = client?.JobCategories.FirstOrDefault(c => c.Id == categoryId);
-
-            if (client != null && category != null)
-            {
-                client.JobCategories.Remove(category);
-                _clientRepository.Update(client);
-            }
+            return clientRepository.GetAll();
         }
 
-        // ---------------- Job Skills ----------------
-        public IEnumerable<JobSkill> GetJobSkillsForClient(int clientId)
+        public Client GetClientById(int id)
         {
-            var client = _clientRepository.GetById(clientId);
-            return client?.JobSkills ?? Enumerable.Empty<JobSkill>();
+            return clientRepository.GetById(id);
         }
 
-        public void AssignJobSkillToClient(int clientId, int skillId)
+        public Client GetClientByIdentity(string id)
         {
-            var client = _clientRepository.GetById(clientId);
-            var skill = _jobSkillService.GetJobSkillById(skillId);
-
-            if (client != null && skill != null && !client.JobSkills.Contains(skill))
-            {
-                client.JobSkills.Add(skill);
-                _clientRepository.Update(client);
-            }
+            return clientRepository.GetClientByIdentityId(id);
         }
 
-        public void RemoveJobSkillFromClient(int clientId, int skillId)
+        public void UpdateClient(Client client)
         {
-            var client = _clientRepository.GetById(clientId);
-            var skill = client?.JobSkills.FirstOrDefault(s => s.Id == skillId);
-
-            if (client != null && skill != null)
-            {
-                client.JobSkills.Remove(skill);
-                _clientRepository.Update(client);
-            }
+            clientRepository.Update(client);
+            clientRepository.Save();
         }
 
-
-        // ... existing methods
-
-        // Jobs
+        // ---------------- Jobs ----------------
         public void AddJob(Job job)
         {
             if (job == null)
                 throw new ArgumentNullException(nameof(job));
 
-            _context.Jobs.Add(job);
-            _context.SaveChanges();
+            // Assuming you will inject and use a JobRepository or service instead of context here
+            throw new NotImplementedException("Implement AddJob logic with proper repository/service.");
         }
     }
 }

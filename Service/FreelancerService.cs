@@ -5,53 +5,68 @@ namespace FreelancingSystem.Service
 {
     public class FreelancerService : IFreelancerService
     {
-        private readonly IFreelancerRepository _freelancerRepository;
-        private readonly IProposalRepository _proposalRepository;
+        private readonly IFreelancerRepository freelancerRepository;
+        private readonly IProposalRepository proposalRepository;
 
         public FreelancerService(
             IFreelancerRepository freelancerRepository,
             IProposalRepository proposalRepository)
         {
-            _freelancerRepository = freelancerRepository;
-            _proposalRepository = proposalRepository;
+            this.freelancerRepository = freelancerRepository;
+            this.proposalRepository = proposalRepository;
         }
 
         // ---------------- Freelancer CRUD ----------------
-        public IEnumerable<Freelancer> GetAllFreelancers()
-            => _freelancerRepository.GetAll();
-
-        public Freelancer GetFreelancerById(int id)
-            => _freelancerRepository.GetById(id);
-
-        public Freelancer GetFreelancerByIdentity(string id)
-            => _freelancerRepository.GetFreelancerByIdentityId(id);
-
         public void AddFreelancer(Freelancer freelancer)
-            => _freelancerRepository.Add(freelancer);
-
-        public void UpdateFreelancer(Freelancer freelancer)
-            => _freelancerRepository.Update(freelancer);
+        {
+            freelancerRepository.Insert(freelancer);
+            freelancerRepository.Save();
+        }
 
         public void DeleteFreelancer(int id)
-            => _freelancerRepository.Delete(id);
+        {
+            freelancerRepository.Delete(id);
+            freelancerRepository.Save();
+        }
+
+        public IEnumerable<Freelancer> GetAllFreelancers()
+        {
+            return freelancerRepository.GetAll();
+        }
+
+        public Freelancer GetFreelancerById(int id)
+        {
+            return freelancerRepository.GetById(id);
+        }
+
+        public Freelancer GetFreelancerByIdentity(string id)
+        {
+            return freelancerRepository.GetFreelancerByIdentityId(id);
+        }
+
+        public void UpdateFreelancer(Freelancer freelancer)
+        {
+            freelancerRepository.Update(freelancer);
+            freelancerRepository.Save();
+        }
 
         // ---------------- Proposal Management ----------------
         public void AddProposal(int freelancerId, Proposal proposal)
         {
-            var freelancer = _freelancerRepository.GetById(freelancerId);
+            var freelancer = freelancerRepository.GetById(freelancerId);
             if (freelancer != null)
             {
                 proposal.FreelancerId = freelancerId;
-                _proposalRepository.Add(proposal);
+                proposalRepository.Add(proposal);
             }
         }
 
         public void DeleteProposal(int freelancerId, int proposalId)
         {
-            var proposal = _proposalRepository.GetById(proposalId);
+            var proposal = proposalRepository.GetById(proposalId);
             if (proposal != null && proposal.FreelancerId == freelancerId)
             {
-                _proposalRepository.Delete(proposalId);
+                proposalRepository.Delete(proposalId);
             }
         }
     }

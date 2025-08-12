@@ -5,91 +5,110 @@ namespace FreelancingSystem.Service
 {
     public class JobService : IJobService
     {
-        private readonly IJobRepository _jobRepository;
-        private readonly IJobCategoryService _jobCategoryService;
-        private readonly IJobSkillService _jobSkillService;
+        private readonly IJobRepository jobRepository;
+        private readonly IJobCategoryService jobCategoryService;
+        private readonly IJobSkillService jobSkillService;
 
         public JobService(
             IJobRepository jobRepository,
             IJobCategoryService jobCategoryService,
             IJobSkillService jobSkillService)
         {
-            _jobRepository = jobRepository;
-            _jobCategoryService = jobCategoryService;
-            _jobSkillService = jobSkillService;
+            this.jobRepository = jobRepository;
+            this.jobCategoryService = jobCategoryService;
+            this.jobSkillService = jobSkillService;
         }
 
         // ---------------- Job CRUD ----------------
-        public IEnumerable<Job> GetAllJobs() => _jobRepository.GetAll();
+        public void AddJob(Job job)
+        {
+            jobRepository.Insert(job);
+            jobRepository.Save();
+        }
 
-        public Job GetJobById(int id) => _jobRepository.GetById(id);
+        public void DeleteJob(int id)
+        {
+            jobRepository.Delete(id);
+            jobRepository.Save();
+        }
 
-        public void AddJob(Job job) => _jobRepository.Add(job);
+        public IEnumerable<Job> GetAllJobs()
+        {
+            return jobRepository.GetAll();
+        }
 
-        public void UpdateJob(Job job) => _jobRepository.Update(job);
+        public Job GetJobById(int id)
+        {
+            return jobRepository.GetById(id);
+        }
 
-        public void DeleteJob(int id) => _jobRepository.Delete(id);
-
+        public void UpdateJob(Job job)
+        {
+            jobRepository.Update(job);
+            jobRepository.Save();
+        }
         // ---------------- Job Categories ----------------
         public IEnumerable<JobCategory> GetJobCategoriesForJob(int jobId)
         {
-            var job = _jobRepository.GetById(jobId);
+            var job = jobRepository.GetById(jobId);
             return job?.JobCategories ?? Enumerable.Empty<JobCategory>();
         }
 
         public void AssignJobCategoryToJob(int jobId, int categoryId)
         {
-            var job = _jobRepository.GetById(jobId);
-            var category = _jobCategoryService.GetJobCategoryById(categoryId);
+            var job = jobRepository.GetById(jobId);
+            var category = jobCategoryService.GetJobCategoryById(categoryId);
 
             if (job != null && category != null && !job.JobCategories.Contains(category))
             {
                 job.JobCategories.Add(category);
-                _jobRepository.Update(job);
+                jobRepository.Update(job);
             }
         }
 
         public void RemoveJobCategoryFromJob(int jobId, int categoryId)
         {
-            var job = _jobRepository.GetById(jobId);
+            var job = jobRepository.GetById(jobId);
             var category = job?.JobCategories.FirstOrDefault(c => c.Id == categoryId);
 
             if (job != null && category != null)
             {
                 job.JobCategories.Remove(category);
-                _jobRepository.Update(job);
+                jobRepository.Update(job);
             }
         }
 
         // ---------------- Job Skills ----------------
         public IEnumerable<JobSkill> GetJobSkillsForJob(int jobId)
         {
-            var job = _jobRepository.GetById(jobId);
+            var job = jobRepository.GetById(jobId);
             return job?.JobSkills ?? Enumerable.Empty<JobSkill>();
         }
 
         public void AssignJobSkillToJob(int jobId, int skillId)
         {
-            var job = _jobRepository.GetById(jobId);
-            var skill = _jobSkillService.GetJobSkillById(skillId);
+            var job = jobRepository.GetById(jobId);
+            var skill = jobSkillService.GetJobSkillById(skillId);
 
             if (job != null && skill != null && !job.JobSkills.Contains(skill))
             {
                 job.JobSkills.Add(skill);
-                _jobRepository.Update(job);
+                jobRepository.Update(job);
             }
         }
 
         public void RemoveJobSkillFromJob(int jobId, int skillId)
         {
-            var job = _jobRepository.GetById(jobId);
+            var job = jobRepository.GetById(jobId);
             var skill = job?.JobSkills.FirstOrDefault(s => s.Id == skillId);
 
             if (job != null && skill != null)
             {
                 job.JobSkills.Remove(skill);
-                _jobRepository.Update(job);
+                jobRepository.Update(job);
             }
         }
     }
 }
+
+

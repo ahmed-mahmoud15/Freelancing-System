@@ -6,26 +6,40 @@ namespace FreelancingSystem.Service
 
     public class JobCategoryService : IJobCategoryService
     {
-        private readonly IJobCategoryRepository _jobCategoryRepository;
+        private readonly IJobCategoryRepository jobCategoryRepository;
 
         public JobCategoryService(IJobCategoryRepository jobCategoryRepository)
         {
-            _jobCategoryRepository = jobCategoryRepository;
+            this.jobCategoryRepository = jobCategoryRepository;
         }
 
-        public IEnumerable<JobCategory> GetAllJobCategories()
-            => _jobCategoryRepository.GetAll();
-
-        public JobCategory GetJobCategoryById(int id)
-            => _jobCategoryRepository.GetById(id);
-
-        public void AddJobCategory(JobCategory category)
-            => _jobCategoryRepository.Add(category);
-
-        public void UpdateJobCategory(JobCategory category)
-            => _jobCategoryRepository.Update(category);
+        public void AddJobCategory(JobCategory jobcategory)
+        {
+            jobcategoryRepository.Insert(jobcategory);
+            jobcategoryRepository.Save();
+        }
 
         public void DeleteJobCategory(int id)
-            => _jobCategoryRepository.Delete(id);
+        {
+            jobcategoryRepository.Delete(id);
+            jobcategoryRepository.Save();
+        }
+
+        public IEnumerable<JobCategory> GetAllJobCategorys()
+        {
+            return jobcategoryRepository.GetAll();
+        }
+
+        public JobCategory GetJobCategoryById(int id)
+        {
+            return jobcategoryRepository.GetById(id);
+        }
+
+        public void UpdateJobCategory(JobCategory jobcategory)
+        {
+            jobcategoryRepository.Update(jobcategory);
+            jobcategoryRepository.Save();
+        }
+
     }
 }

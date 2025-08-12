@@ -12,15 +12,6 @@ namespace FreelancingSystem.Service
         void UpdateClient(Client client);
         void DeleteClient(int id);
 
-        // Job Categories
-        IEnumerable<JobCategory> GetJobCategoriesForClient(int clientId);
-        void AssignJobCategoryToClient(int clientId, int categoryId);
-        void RemoveJobCategoryFromClient(int clientId, int categoryId);
-
-        // Job Skills
-        IEnumerable<JobSkill> GetJobSkillsForClient(int clientId);
-        void AssignJobSkillToClient(int clientId, int skillId);
-        void RemoveJobSkillFromClient(int clientId, int skillId);
         // Jobs
         void AddJob(Job job);
     }
