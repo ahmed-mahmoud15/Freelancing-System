@@ -27,13 +27,31 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 
 builder.Services.AddControllersWithViews();
 
-// Repositories & Services
+
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+// Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRatingRepository, RatingRepository>();
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IFreelancerRepository, FreelancerRepository>();
+builder.Services.AddScoped<IJobCategoryRepository, JobCategoryRepository>();
+builder.Services.AddScoped<IJobRepository, JobRepository>();
+builder.Services.AddScoped<IJobSkillRepository, JobSkillRepository>();
+builder.Services.AddScoped<IProposalRepository, ProposalRepository>();
+
+// Services
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRatingService, RatingService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<IFreelancerService, FreelancerService>();
+builder.Services.AddScoped<IJobCategoryService, JobCategoryService>();
+builder.Services.AddScoped<IJobService, JobService>();
+
+// For services without interfaces, register concrete
+builder.Services.AddScoped<JobSkillService>();
+builder.Services.AddScoped<ProposalService>();
 
 var app = builder.Build();
 
