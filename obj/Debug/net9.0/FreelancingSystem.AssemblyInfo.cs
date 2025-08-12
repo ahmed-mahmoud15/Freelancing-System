@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FreelancingSystem")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+24900bf0265bbebd727c4b14028ff8a7636890d9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d64b5b24b16fbd2fe5eea16cad496c68ea13ae6f")]
 [assembly: System.Reflection.AssemblyProductAttribute("FreelancingSystem")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FreelancingSystem")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
