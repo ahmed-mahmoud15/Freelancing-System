@@ -82,7 +82,7 @@ namespace FreelancingSystem.Controllers
 
                     if (result.Succeeded)
                     {
-                        return RedirectToAction(); // freelancer dashboard
+                        return RedirectToAction("Index","Home"); // freelancer dashboard
                     }
                 }
             }
