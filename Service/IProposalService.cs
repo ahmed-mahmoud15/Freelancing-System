@@ -1,17 +1,26 @@
 ﻿using FreelancingSystem.Models;
+using System.Collections.Generic;
 
 namespace FreelancingSystem.Service
 {
     public interface IProposalService
     {
         IEnumerable<Proposal> GetAllProposals();
-        Proposal GetProposalById(int id);
-        void AddProposal(Proposal proposal);
-        void UpdateProposal(Proposal proposal);
-        void DeleteProposal(int id);
 
-        // New status methods
-        void ApproveProposal(int proposalId, int clientId);
-        void RejectProposal(int proposalId, int clientId);
+        // Updated to use composite key
+        Proposal GetProposalById(int jobId, int freelancerId);
+
+        void AddProposal(Proposal proposal);
+
+        void UpdateProposal(Proposal proposal);
+
+        // Updated to use composite key
+        void DeleteProposal(int jobId, int freelancerId);
+
+        // Updated to use composite key
+        void ApproveProposal(int jobId, int freelancerId, int clientId);
+
+        // Updated to use composite key
+        void RejectProposal(int jobId, int freelancerId, int clientId);
     }
 }

@@ -8,9 +8,9 @@ namespace FreelancingSystem.Repository
 
         public JobRepository(ApplicationDbContext context) : base(context) { }
 
-        public Job GetJobByIdentityId(string id)
+        public Job GetJobById(string id)
         {
-            return table.FirstOrDefault(e => e.IdentityId.Equals(id));
+            return table.FirstOrDefault(e => e.Id.Equals(id));
         }
     }
 }

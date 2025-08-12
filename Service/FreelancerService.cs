@@ -57,16 +57,16 @@ namespace FreelancingSystem.Service
             if (freelancer != null)
             {
                 proposal.FreelancerId = freelancerId;
-                proposalRepository.Add(proposal);
+                proposalRepository.Insert(proposal);
             }
         }
 
-        public void DeleteProposal(int freelancerId, int proposalId)
+        public void DeleteProposal(int jobId, int freelancerId)
         {
-            var proposal = proposalRepository.GetById(proposalId);
+            var proposal = proposalRepository.GetByIds(jobId, freelancerId);
             if (proposal != null && proposal.FreelancerId == freelancerId)
             {
-                proposalRepository.Delete(proposalId);
+                proposalRepository.Delete(jobId, freelancerId);
             }
         }
     }

@@ -6,6 +6,6 @@
         UnderReview,
         Interviewing,
         Rejected,
-        Accepted
+        Approved
     }
 }

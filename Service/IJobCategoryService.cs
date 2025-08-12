@@ -1,13 +1,14 @@
 ﻿using FreelancingSystem.Models;
+using System.Collections.Generic;
 
 namespace FreelancingSystem.Service
 {
     public interface IJobCategoryService
     {
         IEnumerable<JobCategory> GetAllJobCategories();
-        JobCategory GetJobCategoryById(int id);
-        void AddJobCategory(JobCategory category);
-        void UpdateJobCategory(JobCategory category);
-        void DeleteJobCategory(int id);
+        JobCategory GetJobCategoryByIds(int jobId, int categoryId);
+        void CreateJobCategory(JobCategory jobCategory);
+        void UpdateJobCategory(JobCategory jobCategory);
+        void DeleteJobCategory(int jobId, int categoryId);
     }
 }

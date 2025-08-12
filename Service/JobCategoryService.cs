@@ -1,50 +1,41 @@
 ﻿using FreelancingSystem.Models;
 using FreelancingSystem.Repository;
+using System.Collections.Generic;
 
 namespace FreelancingSystem.Service
 {
-
     public class JobCategoryService : IJobCategoryService
     {
-        private readonly IJobCategoryRepository jobCategoryRepository;
+        private readonly IJobCategoryRepository _jobCategoryRepository;
 
         public JobCategoryService(IJobCategoryRepository jobCategoryRepository)
         {
-            this.jobCategoryRepository = jobCategoryRepository;
-        }
-
-        public void AddJobCategory(JobCategory jobcategory)
-        {
-            jobCategoryRepository.Insert(jobcategory);
-            jobCategoryRepository.Save();
-        }
-
-        public void DeleteJobCategory(int id)
-        {
-            jobCategoryRepository.Delete(id);
-            jobCategoryRepository.Save();
+            _jobCategoryRepository = jobCategoryRepository;
         }
 
         public IEnumerable<JobCategory> GetAllJobCategories()
         {
-            throw new NotImplementedException();
+            return _jobCategoryRepository.GetAll();
         }
 
-        public IEnumerable<JobCategory> GetAllJobCategorys()
+        public JobCategory GetJobCategoryByIds(int jobId, int categoryId)
         {
-            return jobCategoryRepository.GetAll();
+            return _jobCategoryRepository.GetByIds(jobId, categoryId);
         }
 
-        public JobCategory GetJobCategoryById(int id)
+        public void CreateJobCategory(JobCategory jobCategory)
         {
-            return jobCategoryRepository.GetById(id);
+            _jobCategoryRepository.Insert(jobCategory);
         }
 
-        public void UpdateJobCategory(JobCategory jobcategory)
+        public void UpdateJobCategory(JobCategory jobCategory)
         {
-            jobCategoryRepository.Update(jobcategory);
-            jobCategoryRepository.Save();
+            _jobCategoryRepository.Update(jobCategory);
         }
 
+        public void DeleteJobCategory(int jobId, int categoryId)
+        {
+            _jobCategoryRepository.Delete(jobId, categoryId);
+        }
     }
 }
