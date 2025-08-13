@@ -1,0 +1,49 @@
+﻿@model FreelancingSystem.ViewModel.EditClientViewModel
+@{
+    ViewData["Title"] = "Edit Client Profile";
+}
+
+<div class="container mt-4">
+    <h2>Edit Profile</h2>
+    <hr />
+
+    <form asp-action="EditProfile" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger"></div>
+     
+        <div class="form-group mb-3">
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="CompanyName"></label>
+            <input asp-for="CompanyName" class="form-control" />
+            <span asp-validation-for="CompanyName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Profile Image</label>
+            <input type="file" name="ProfileImageFile" class="form-control" />
+            @if (!string.IsNullOrEmpty(Model.ProfileImagePath))
+            {
+                <img src="@Model.ProfileImagePath" class="mt-2 img-thumbnail" style="max-width: 150px;" />
+            }
+        </div>
+
+        <button type="submit" class="btn btn-success">Save Changes</button>
+        <a asp-action="Profile" asp-route-id="@Model.Id" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

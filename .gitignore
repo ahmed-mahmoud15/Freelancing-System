@@ -2,14 +2,26 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+FreelancingSystem/bin/Debug/net9.0/FreelancingSystem.dll
+FreelancingSystem/bin/Debug/net9.0/FreelancingSystem.exe
+FreelancingSystem/bin/Debug/net9.0/FreelancingSystem.pdb
+FreelancingSystem/obj/Debug/net9.0/refint/FreelancingSystem.dll
+FreelancingSystem/obj/Debug/net9.0/ref/FreelancingSystem.dll
+FreelancingSystem/obj/Debug/net9.0/apphost.exe
+FreelancingSystem/obj/Debug/net9.0/FreelancingSystem.AssemblyInfo.cs
+FreelancingSystem/obj/Debug/net9.0/FreelancingSystem.dll
+FreelancingSystem/obj/Debug/net9.0/FreelancingSystem.AssemblyInfoInputs.cache
+FreelancingSystem/obj/Debug/net9.0/FreelancingSystem.pdb
+FreelancingSystem/obj/Debug/net9.0/FreelancingSystem.sourcelink.json
+FreelancingSystem/obj/Debug/net9.0/rjsmcshtml.dswa.cache.json
+FreelancingSystem/obj/Debug/net9.0/rjsmrazor.dswa.cache.json
+FreelancingSystem/obj/Debug/net9.0/rpswa.dswa.cache.json
+/FreelancingSystem/obj/Debug/net9.0
 /.vs
-/FreelancingSystem
-/obj/Release/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs
-/obj/Release/net9.0/FreelancingSystem.AssemblyInfo.cs
-/obj/Release/net9.0/FreelancingSystem.AssemblyInfoInputs.cache
-/obj/Release/net9.0/FreelancingSystem.assets.cache
-/obj/Release/net9.0/FreelancingSystem.csproj.AssemblyReference.cache
-/obj/Release/net9.0/FreelancingSystem.GeneratedMSBuildEditorConfig.editorconfig
-/obj/Release/net9.0/FreelancingSystem.GlobalUsings.g.cs
-/obj/Release/net9.0/FreelancingSystem.RazorAssemblyInfo.cache
-/obj/Release/net9.0/FreelancingSystem.RazorAssemblyInfo.cs
+/FreelancingSystem/obj/Debug/net9.0/FreelancingSystem.GeneratedMSBuildEditorConfig.editorconfig
+/FreelancingSystem/obj/FreelancingSystem.csproj.nuget.g.props
+/FreelancingSystem/obj/FreelancingSystem.csproj.nuget.dgspec.json
+/FreelancingSystem/obj/project.assets.json
+/FreelancingSystem/obj/project.nuget.cache
+/obj/Release/net9.0
+/FreelancingSystem/bin/Debug/net9.0
