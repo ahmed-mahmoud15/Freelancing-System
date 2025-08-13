@@ -41,7 +41,7 @@ namespace FreelancingSystem.Controllers
                 //return model.Role == RoleViewModel.Client
                 //    ? RedirectToAction("Dashboard", "Client")
                 //    : RedirectToAction("Dashboard", "Freelancer");
-                return RedirectToAction("Login", "Account", new { area = "Identity"});
+                return LocalRedirect("/Identity/Account/Login");
             }
 
             ModelState.AddModelError("", "Registration failed.");
