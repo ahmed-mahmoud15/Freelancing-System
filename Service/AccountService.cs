@@ -28,15 +28,6 @@ namespace FreelancingSystem.Service
 
         public async Task<bool> RegisterAccountAsync(RegisterViewModel model, string identityId)
         {
-            var user = new User
-            {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                ProfileImagePath = model.PhotoPath,
-                IdentityId = identityId
-            };
-            _userService.AddUser(user);
-
             var identityUser = await _userManager.FindByIdAsync(identityId);
             if (identityUser == null) return false;
 
@@ -50,8 +41,11 @@ namespace FreelancingSystem.Service
             {
                 var client = new Client
                 {
-                    CompanyName = model.ClientCompanyName,
-                    Id = user.Id
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    ProfileImagePath = model.PhotoPath,
+                    IdentityId = identityId,
+                    CompanyName = model.ClientCompanyName
                 };
                 _clientService.AddClient(client);
             }
@@ -59,8 +53,11 @@ namespace FreelancingSystem.Service
             {
                 var freelancer = new Freelancer
                 {
-                    Bio = model.FreelancerBio,
-                    Id = user.Id
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    ProfileImagePath = model.PhotoPath,
+                    IdentityId = identityId,
+                    Bio = model.FreelancerBio
                 };
                 _freelancerService.AddFreelancer(freelancer);
             }
@@ -68,5 +65,6 @@ namespace FreelancingSystem.Service
             var result = await _userManager.AddToRoleAsync(identityUser, roleName);
             return result.Succeeded;
         }
+
     }
 }

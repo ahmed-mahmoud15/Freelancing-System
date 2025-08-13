@@ -1,50 +1,65 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FreelancingSystem.Models;
-using System.Threading.Tasks;
+using FreelancingSystem.Data;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace FreelancingSystem.Controllers
 {
     public class ClientController : Controller
     {
-        // Simulate data fetching and saving - replace with DB context
-        private static Client _client = new Client
-        {
-            Id = 1,
-            FirstName = "John",
-            LastName = "Doe",
-            CompanyName = "Acme Corp",
-            ProfileImagePath = "/images/default-profile.png",
-            IdentityId = "identity-123",
-        };
+        private readonly ApplicationDbContext _context;
 
-        // GET: Client/Profile
-        public IActionResult Profile()
+        public ClientController(ApplicationDbContext context)
         {
-            return View(_client);
+            _context = context;
         }
 
-        // GET: Client/EditProfile
-        public IActionResult EditProfile()
+        // GET: Client/Profile/1
+        public async Task<IActionResult> Profile(int id)
         {
-            return View(_client);
+            var client = await _context.Clients.FirstOrDefaultAsync(c => c.Id == id);
+            if (client == null)
+            {
+                return NotFound();
+            }
+            return View(client);
         }
 
-        // POST: Client/EditProfile
+        // GET: Client/EditProfile/1
+        public async Task<IActionResult> EditProfile(int id)
+        {
+            var client = await _context.Clients.FirstOrDefaultAsync(c => c.Id == id);
+            if (client == null)
+            {
+                return NotFound();
+            }
+            return View(client);
+        }
+
+        // POST: Client/EditProfile/1
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditProfile(Client model, IFormFile ProfileImageFile)
+        public async Task<IActionResult> EditProfile(int id, Client model, IFormFile ProfileImageFile)
         {
+            if (id != model.Id)
+                return BadRequest();
+
             if (!ModelState.IsValid)
-            {
+            {   
                 return View(model);
             }
 
+            var client = await _context.Clients.FirstOrDefaultAsync(c => c.Id == id);
+            if (client == null)
+                return NotFound();
+
             // Update client details
-            _client.FirstName = model.FirstName;
-            _client.LastName = model.LastName;
-            _client.CompanyName = model.CompanyName;
+            client.FirstName = model.FirstName;
+            client.LastName = model.LastName;
+            client.CompanyName = model.CompanyName;
 
             // Handle profile image upload
             if (ProfileImageFile != null && ProfileImageFile.Length > 0)
@@ -52,7 +67,7 @@ namespace FreelancingSystem.Controllers
                 var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
                 Directory.CreateDirectory(uploadsFolder);
 
-                var fileName = $"{_client.Id}_{Path.GetFileName(ProfileImageFile.FileName)}";
+                var fileName = $"{client.Id}_{Path.GetFileName(ProfileImageFile.FileName)}";
                 var filePath = Path.Combine(uploadsFolder, fileName);
 
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
@@ -60,13 +75,14 @@ namespace FreelancingSystem.Controllers
                     await ProfileImageFile.CopyToAsync(fileStream);
                 }
 
-                _client.ProfileImagePath = "/images/" + fileName;
+                client.ProfileImagePath = "/images/" + fileName;
             }
 
-            // In real app, save changes to DB here
+            _context.Update(client);
+            await _context.SaveChangesAsync();
 
             TempData["SuccessMessage"] = "Profile updated successfully!";
-            return RedirectToAction(nameof(Profile));
+            return RedirectToAction(nameof(Profile), new { id = client.Id });
         }
     }
 }
