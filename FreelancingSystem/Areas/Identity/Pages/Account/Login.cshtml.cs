@@ -26,7 +26,7 @@ namespace FreelancingSystem.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> userManager;
         private readonly IUserService userService;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger, UserManager<IdentityUser> userManager,IUserService userService)
+        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger, UserManager<IdentityUser> userManager, IUserService userService)
         {
             _signInManager = signInManager;
             _logger = logger;
@@ -132,9 +132,9 @@ namespace FreelancingSystem.Areas.Identity.Pages.Account
                     {
                         await userManager.AddClaimAsync(user, new Claim("UserId", id.ToString()));
                     }
-                    
-                    
-                    
+
+
+
 
                     if (roles.Contains("Admin"))
                     {
@@ -142,11 +142,11 @@ namespace FreelancingSystem.Areas.Identity.Pages.Account
                     }
                     else if (roles.Contains("Client"))
                     {
-                        return RedirectToAction("Profile", "Client", new { id = id});
+                        return RedirectToAction("Profile", "Client", new { id = id });
                     }
                     else if (roles.Contains("Freelancer"))
                     {
-                        // redirect lel freelancer dashboard
+                        return RedirectToAction("Profile", "Freelancer", new { id = id });
                     }
                     else
                     {
