@@ -13,5 +13,13 @@ namespace FreelancingSystem.Repository
         {
             return context.Jobs.Where(x => x.ClientId == id).Include(x => x.Client).ToList();
         }
+
+        public IEnumerable<Job> GetJobsNotAppliedByFreelancer(int freelancerId)
+        {
+            return context.Jobs
+                .Where(job => ! context.Proposals
+                .Any(p => p.JobId == job.Id && p.FreelancerId == freelancerId))
+                .ToList();
+        }
     }
 }

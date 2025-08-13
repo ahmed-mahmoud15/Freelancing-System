@@ -6,6 +6,6 @@ namespace FreelancingSystem.Repository
     {
         IEnumerable<Job> GetJobsByClientId(int id);
 
-
+        IEnumerable<Job> GetJobsNotAppliedByFreelancer(int freelancerId);
     }
 }

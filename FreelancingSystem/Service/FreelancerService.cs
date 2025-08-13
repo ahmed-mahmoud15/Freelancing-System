@@ -17,8 +17,9 @@ namespace FreelancingSystem.Service
         }
 
         // ---------------- Freelancer CRUD ----------------
-        public void AddFreelancer(Freelancer freelancer)
+        public void AddFreelancer(Freelancer freelancer, IFormFile file)
         {
+            HandleProfileImageUpload(freelancer, file);
             freelancerRepository.Insert(freelancer);
             freelancerRepository.Save();
         }
@@ -44,10 +45,30 @@ namespace FreelancingSystem.Service
             return freelancerRepository.GetFreelancerByIdentityId(id);
         }
 
-        public void UpdateFreelancer(Freelancer freelancer)
+        public void UpdateFreelancer(Freelancer freelancer, IFormFile file)
         {
+            HandleProfileImageUpload(freelancer, file);
             freelancerRepository.Update(freelancer);
             freelancerRepository.Save();
+        }
+
+        private void HandleProfileImageUpload(Freelancer freelancer, IFormFile profileImageFile)
+        {
+            if (profileImageFile != null && profileImageFile.Length > 0)
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                Directory.CreateDirectory(uploadsFolder);
+
+                var fileName = $"{freelancer.Id}_{Path.GetFileName(profileImageFile.FileName)}";
+                var filePath = Path.Combine(uploadsFolder, fileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    profileImageFile.CopyTo(fileStream);
+                }
+
+                freelancer.ProfileImagePath = "/images/" + fileName;
+            }
         }
 
         // ---------------- Proposal Management ----------------
