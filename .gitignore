@@ -17,3 +17,10 @@ FreelancingSystem/obj/Debug/net9.0/rjsmcshtml.dswa.cache.json
 FreelancingSystem/obj/Debug/net9.0/rjsmrazor.dswa.cache.json
 FreelancingSystem/obj/Debug/net9.0/rpswa.dswa.cache.json
 /FreelancingSystem/obj/Debug/net9.0
+/.vs
+/FreelancingSystem/obj/Debug/net9.0/FreelancingSystem.GeneratedMSBuildEditorConfig.editorconfig
+/FreelancingSystem/obj/FreelancingSystem.csproj.nuget.g.props
+/FreelancingSystem/obj/FreelancingSystem.csproj.nuget.dgspec.json
+/FreelancingSystem/obj/project.assets.json
+/FreelancingSystem/obj/project.nuget.cache
+/obj/Release/net9.0
