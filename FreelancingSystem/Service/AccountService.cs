@@ -59,7 +59,7 @@ namespace FreelancingSystem.Service
                     IdentityId = identityId,
                     Bio = model.FreelancerBio
                 };
-                _freelancerService.AddFreelancer(freelancer);
+                _freelancerService.AddFreelancer(freelancer, ProfileImageFile);
             }
 
             var result = await _userManager.AddToRoleAsync(identityUser, roleName);

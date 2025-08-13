@@ -7,6 +7,8 @@ namespace FreelancingSystem.Service
         // Job CRUD
         IEnumerable<Job> GetAllJobs();
         IEnumerable<Job> GetJobsByClinetId(int id);
+
+        IEnumerable<Job> GetJobsNotAppliedByFreelancer(int freelancerId);
         Job GetJobById(int id);
         void AddJob(Job job);
         void UpdateJob(Job job);

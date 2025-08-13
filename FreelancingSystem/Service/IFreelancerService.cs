@@ -8,8 +8,8 @@ namespace FreelancingSystem.Service
         IEnumerable<Freelancer> GetAllFreelancers();
         Freelancer GetFreelancerById(int id);
         Freelancer GetFreelancerByIdentity(string id);
-        void AddFreelancer(Freelancer freelancer);
-        void UpdateFreelancer(Freelancer freelancer);
+        void AddFreelancer(Freelancer freelancer, IFormFile file);
+        void UpdateFreelancer(Freelancer freelancer, IFormFile file);
         void DeleteFreelancer(int id);
 
         // Proposal management

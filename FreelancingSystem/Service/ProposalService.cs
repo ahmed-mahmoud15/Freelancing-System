@@ -65,5 +65,10 @@ namespace FreelancingSystem.Service
         {
             return _proposalRepository.GetAllByJobId(jobId);
         }
+
+        public IEnumerable<Proposal> GetAllJobsForFreelancer(int freelancerId)
+        {
+            return _proposalRepository.GetAllByFreelancerId(freelancerId);
+        }
     }
 }

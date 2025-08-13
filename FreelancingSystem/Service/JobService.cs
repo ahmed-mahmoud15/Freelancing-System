@@ -112,5 +112,10 @@ namespace FreelancingSystem.Service
         {
             return jobRepository.GetJobsByClientId(id);
         }
+
+        public IEnumerable<Job> GetJobsNotAppliedByFreelancer(int freelancerId)
+        {
+            return jobRepository.GetJobsNotAppliedByFreelancer(freelancerId);
+        }
     }
 }

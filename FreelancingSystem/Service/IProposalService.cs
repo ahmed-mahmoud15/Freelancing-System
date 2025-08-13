@@ -11,6 +11,7 @@ namespace FreelancingSystem.Service
         Proposal GetProposalById(int jobId, int freelancerId);
 
         IEnumerable<Proposal> GetAllFreelancersAppliedFor(int jobId);
+        IEnumerable<Proposal> GetAllJobsForFreelancer(int freelancerId);
 
         void AddProposal(Proposal proposal);
 
