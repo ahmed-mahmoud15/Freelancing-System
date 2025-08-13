@@ -9,8 +9,8 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Register">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="Register" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
 
             <div class="form-group">
                 <label asp-for="FirstName"></label>
@@ -24,10 +24,10 @@
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="PhotoPath"></label>
-                <input asp-for="PhotoPath" class="form-control" type="file"/>
-                <span asp-validation-for="PhotoPath" class="text-danger"></span>
+                <input type="file" name="ProfileImageFile" class="form-control" />
+                <span asp-validation-for="PhotoPath"></span>
             </div>
 
             <!-- Role Selection -->
