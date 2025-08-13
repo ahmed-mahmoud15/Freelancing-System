@@ -1,5 +1,7 @@
 ﻿using FreelancingSystem.Models;
 using FreelancingSystem.Repository;
+using Microsoft.AspNetCore.Http; // my edit: for IFormFile
+using System.IO;                 // my edit: for Path, FileStream
 
 namespace FreelancingSystem.Service
 {
@@ -13,8 +15,10 @@ namespace FreelancingSystem.Service
         }
 
         // ---------------- Client CRUD ----------------
-        public void AddClient(Client client)
+        
+        public void AddClient(Client client, IFormFile file)
         {
+            HandleProfileImageUpload(client, file);
             clientRepository.Insert(client);
             clientRepository.Save();
         }
@@ -40,20 +44,30 @@ namespace FreelancingSystem.Service
             return clientRepository.GetClientByIdentityId(id);
         }
 
-        public void UpdateClient(Client client)
+        public void UpdateClient(Client client, IFormFile file)
         {
+            HandleProfileImageUpload(client, file);
             clientRepository.Update(client);
             clientRepository.Save();
         }
 
-        // ---------------- Jobs ----------------
-        public void AddJob(Job job)
+        private void HandleProfileImageUpload(Client client, IFormFile profileImageFile)
         {
-            if (job == null)
-                throw new ArgumentNullException(nameof(job));
+            if (profileImageFile != null && profileImageFile.Length > 0)
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                Directory.CreateDirectory(uploadsFolder);
 
-            // Assuming you will inject and use a JobRepository or service instead of context here
-            throw new NotImplementedException("Implement AddJob logic with proper repository/service.");
+                var fileName = $"{client.Id}_{Path.GetFileName(profileImageFile.FileName)}";
+                var filePath = Path.Combine(uploadsFolder, fileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    profileImageFile.CopyTo(fileStream);
+                }
+
+                client.ProfileImagePath = "/images/" + fileName;
+            }
         }
     }
 }

@@ -1,0 +1,70 @@
+﻿@model FreelancingSystem.ViewModel.FreelancerProfileViewModel
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-md-3">
+            @if (!string.IsNullOrEmpty(Model.PhotoPath))
+            {
+                <img src="@Url.Content(Model.PhotoPath)" alt="@Model.Name" class="img-fluid border" />
+            }
+            else
+            {
+                <img src="~/images/default-profile.png" alt="Default Profile" class="img-fluid rounded-circle border" />
+            }
+        </div>
+        <div class="col-md-9">
+            <h2>@Model.Name</h2>
+            <p>@Model.Bio</p>
+            <a asp-action="EditProfile" asp-route-id="@Model.Id" class="btn btn-primary">Edit Profile</a>
+
+            <a asp-action="JobSearch" class="btn btn-info">Browse Jobs</a>
+        </div>
+    </div>
+
+    <hr />
+
+    <h3>My Proposals</h3>
+
+    @if (Model.Proposals != null && Model.Proposals.Any())
+    {
+        var groupedProposals = Model.Proposals.GroupBy(p => p.Status);
+
+        foreach (var group in groupedProposals)
+        {
+            <div class="mb-4">
+                <h4 class="text-capitalize">@group.Key.ToString()</h4>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Job Title</th>
+                            <th>Bid</th>
+                            <th>View Job</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var proposal in group)
+                        {
+                            <tr>
+                                <td>@proposal.Name</td>
+                                <td>@proposal.Bid</td>
+                                <td>
+                                    <a asp-controller="Freelancer" asp-action="ProposalDetails" asp-route-freelancerId="@Model.Id" asp-route-jobId="@proposal.JobId" class="btn btn-info btn-sm">
+                                        View
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No proposals submitted yet.</p>
+    }
+</div>

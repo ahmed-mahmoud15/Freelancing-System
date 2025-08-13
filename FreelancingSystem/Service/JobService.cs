@@ -107,5 +107,15 @@ namespace FreelancingSystem.Service
                 jobSkillRepository.Save();
             }
         }
+
+        public IEnumerable<Job> GetJobsByClinetId(int id)
+        {
+            return jobRepository.GetJobsByClientId(id);
+        }
+
+        public IEnumerable<Job> GetJobsNotAppliedByFreelancer(int freelancerId)
+        {
+            return jobRepository.GetJobsNotAppliedByFreelancer(freelancerId);
+        }
     }
 }

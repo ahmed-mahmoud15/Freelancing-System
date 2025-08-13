@@ -26,7 +26,7 @@ namespace FreelancingSystem.Service
             _roleManager = roleManager;
         }
 
-        public async Task<bool> RegisterAccountAsync(RegisterViewModel model, string identityId)
+        public async Task<bool> RegisterAccountAsync(RegisterViewModel model, string identityId, IFormFile ProfileImageFile)
         {
             var identityUser = await _userManager.FindByIdAsync(identityId);
             if (identityUser == null) return false;
@@ -47,7 +47,7 @@ namespace FreelancingSystem.Service
                     IdentityId = identityId,
                     CompanyName = model.ClientCompanyName
                 };
-                _clientService.AddClient(client);
+                _clientService.AddClient(client, ProfileImageFile);
             }
             else if (model.Role == RoleViewModel.Freelancer)
             {
@@ -59,7 +59,7 @@ namespace FreelancingSystem.Service
                     IdentityId = identityId,
                     Bio = model.FreelancerBio
                 };
-                _freelancerService.AddFreelancer(freelancer);
+                _freelancerService.AddFreelancer(freelancer, ProfileImageFile);
             }
 
             var result = await _userManager.AddToRoleAsync(identityUser, roleName);

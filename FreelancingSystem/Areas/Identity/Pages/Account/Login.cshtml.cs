@@ -146,7 +146,7 @@ namespace FreelancingSystem.Areas.Identity.Pages.Account
                     }
                     else if (roles.Contains("Freelancer"))
                     {
-                        // redirect lel freelancer dashboard
+                        return RedirectToAction("Profile", "Freelancer", new { id = id });
                     }
                     else
                     {

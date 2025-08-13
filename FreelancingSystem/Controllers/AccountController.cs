@@ -22,10 +22,18 @@ namespace FreelancingSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model, IFormFile ProfileImageFile)
         {
             if (!ModelState.IsValid)
+            {
+                foreach(var error in ModelState)
+                {
+                    ModelState.AddModelError(error.Key, error.Value.ToString());
+                }
+                
                 return View(model);
+            }
+                
 
             string? identityId = HttpContext.Session.GetString("user_id");
             if (string.IsNullOrEmpty(identityId))
@@ -34,14 +42,11 @@ namespace FreelancingSystem.Controllers
                 return View(model);
             }
 
-            bool success = await _accountService.RegisterAccountAsync(model, identityId);
+            bool success = await _accountService.RegisterAccountAsync(model, identityId, ProfileImageFile);
 
             if (success)
             {
-                //return model.Role == RoleViewModel.Client
-                //    ? RedirectToAction("Dashboard", "Client")
-                //    : RedirectToAction("Dashboard", "Freelancer");
-                return RedirectToAction("Login", "Account", new { area = "Identity"});
+                return LocalRedirect("/Identity/Account/Login");
             }
 
             ModelState.AddModelError("", "Registration failed.");
