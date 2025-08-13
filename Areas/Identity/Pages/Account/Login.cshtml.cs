@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using FreelancingSystem.Service;
 
 namespace FreelancingSystem.Areas.Identity.Pages.Account
 {
@@ -21,11 +22,15 @@ namespace FreelancingSystem.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly IUserService userService;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger, UserManager<IdentityUser> userManager,IUserService userService)
         {
             _signInManager = signInManager;
             _logger = logger;
+            this.userManager = userManager;
+            this.userService = userService;
         }
 
         /// <summary>
@@ -115,7 +120,28 @@ namespace FreelancingSystem.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+
+                    var user = await userManager.FindByEmailAsync(Input.Email);
+                    var roles = await userManager.GetRolesAsync(user);
+                    HttpContext.Session.SetInt32("ID", userService.GetUserByIdentity(user.Id).Id);
+                    int? iD = HttpContext.Session.GetInt32("ID");
+
+                    if (roles.Contains("Admin"))
+                    {
+                        // redirect lel admin dashboard
+                    }
+                    else if (roles.Contains("Client"))
+                    {
+                        return RedirectToAction("Profile", "Client", new { id = iD});
+                    }
+                    else if (roles.Contains("Freelancer"))
+                    {
+                        // redirect lel freelancer dashboard
+                    }
+                    else
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
                 }
                 if (result.RequiresTwoFactor)
                 {

@@ -50,8 +50,9 @@ builder.Services.AddScoped<IJobCategoryService, JobCategoryService>();
 builder.Services.AddScoped<IJobService, JobService>();
 
 // For services without interfaces, register concrete
-builder.Services.AddScoped<JobSkillService>();
-builder.Services.AddScoped<ProposalService>();
+builder.Services.AddScoped<IJobSkillService,JobSkillService>();
+builder.Services.AddScoped<IProposalService,ProposalService>();
+
 
 var app = builder.Build();
 
