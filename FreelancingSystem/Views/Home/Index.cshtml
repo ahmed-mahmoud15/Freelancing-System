@@ -2,28 +2,33 @@
     ViewData["Title"] = "Home Page";
 }
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            background: #f8f9fa;
-            color: #88e7e1;
+            background: linear-gradient(to bottom right, #f8f9fa, #e9f2ff);
+            color: #333;
             line-height: 1.6;
         }
 
+        /* NAVBAR / HEADER */
         header {
-            background: #e9ecef;
+            background: #F0FCFC;
             padding: 60px 20px 40px;
             text-align: center;
             border-bottom: 2px solid #dee2e6;
-            box-shadow: 0 2px 5px rgb(0 0 0 / 0.05);
+            box-shadow: 0 4px 20px rgba(37,117,252,0.15); /* soft blue shadow */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
             header h1 {
@@ -32,7 +37,7 @@
                 font-weight: 700;
                 color: #062040;
                 letter-spacing: 2px;
-                user-select: none;
+                transition: color 0.4s ease;
             }
 
             header p {
@@ -42,8 +47,11 @@
                 color: #21277f;
                 font-weight: 400;
                 letter-spacing: 0.5px;
-                user-select: none;
+                transition: color 0.4s ease;
             }
+
+            header h1:hover { color: #2575fc; }
+            header p:hover { color: #495057cc; }
 
         main {
             max-width: 1080px;
@@ -58,9 +66,9 @@
             text-align: center;
             color: #1b0665;
             letter-spacing: 1.1px;
-            user-select: none;
         }
 
+        /* FEATURES GRID */
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -71,68 +79,46 @@
             background: white;
             padding: 30px 25px;
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgb(0 0 0 / 0.07), 0 8px 20px rgb(0 0 0 / 0.06);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-            cursor: default;
-            user-select: none;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 8px 18px rgba(37,117,252,0.15), 0 4px 10px rgba(0,0,0,0.05); /* colored shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
         }
 
-            .feature::before {
-                content: "";
-                position: absolute;
-                top: -60%;
-                left: -60%;
-                width: 200%;
-                height: 200%;
-                background: radial-gradient(circle at center, #2575fc99, transparent 70%);
-                opacity: 0;
-                transition: opacity 0.35s ease;
-                z-index: 0;
-                border-radius: 50%;
-            }
-
-            .feature:hover::before {
-                opacity: 1;
-            }
-
             .feature:hover {
-                transform: translateY(-12px);
-                box-shadow: 0 12px 30px rgb(37 117 252 / 0.3), 0 6px 20px rgb(37 117 252 / 0.2);
-                z-index: 1;
+                transform: translateY(-8px);
+                box-shadow: 0 12px 28px rgba(37,117,252,0.25), 0 6px 20px rgba(0,0,0,0.08);
+            }
+
+            .feature i {
+                font-size: 2.5rem;
+                color: #2575fc;
+                margin-bottom: 15px;
+                filter: drop-shadow(0 3px 5px rgba(37,117,252,0.3)); /* icon shadow */
             }
 
             .feature h3 {
                 color: #2575fc;
-                margin-bottom: 18px;
+                margin-bottom: 12px;
                 font-size: 1.6rem;
-                position: relative;
-                z-index: 2;
             }
 
             .feature p {
                 color: #495057;
-                font-weight: 400;
-                line-height: 1.5;
                 font-size: 1rem;
-                position: relative;
-                z-index: 2;
             }
 
+        /* CALL TO ACTION */
         section.call-to-action {
             text-align: center;
             max-width: 700px;
             margin: 80px auto 0;
             color: #212529;
-            user-select: none;
         }
 
             section.call-to-action h2 {
                 font-weight: 700;
                 font-size: 2.4rem;
                 margin-bottom: 18px;
-                letter-spacing: 1px;
             }
 
             section.call-to-action p {
@@ -140,30 +126,52 @@
                 line-height: 1.6;
                 color: #495057;
                 max-width: 600px;
-                margin: 0 auto;
-                font-weight: 400;
+                margin: 0 auto 20px;
             }
 
+        .cta-button {
+            display: inline-block;
+            background: #2575fc;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 12px rgba(37,117,252,0.3);
+        }
+
+            .cta-button:hover {
+                background: #1a5fd8;
+                box-shadow: 0 8px 20px rgba(37,117,252,0.4);
+            }
+
+        /* FOOTER */
         footer {
             text-align: center;
             padding: 30px 15px;
             font-size: 0.9rem;
             color: #868e96;
             background: #e9ecef;
-            user-select: none;
             border-top: 1px solid #dee2e6;
-            letter-spacing: 0.05em;
         }
 
-        /* Subtle hover effect on header text for interactive feel */
-        header h1:hover {
-            color: #2575fc;
-            transition: color 0.4s ease;
+        /* FADE-IN ANIMATION */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
         }
 
-        header p:hover {
-            color: #495057cc;
-            transition: color 0.4s ease;
+            .fade-in:nth-child(1) { animation-delay: 0.2s; }
+            .fade-in:nth-child(2) { animation-delay: 0.4s; }
+            .fade-in:nth-child(3) { animation-delay: 0.6s; }
+
+        @@keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -171,29 +179,33 @@
 
     <header>
         <h1>Welcome to FreelanceHub</h1>
-        <p>Your ultimate platform to connect, create, and conquer the freelancing world — absolutely free!</p>
+        <p>We’re Ahmed Mahmoud, Malak Mashaly, and Sara Ashraf — here to help freelancers find quality job opportunities and grow their careers.</p>
     </header>
 
     <main>
         <h2 class="section-title">Why Choose FreelanceHub?</h2>
         <div class="features">
-            <article class="feature" tabindex="0" aria-label="Discover Amazing Projects">
+            <article class="feature fade-in">
+                <i class="fas fa-briefcase"></i>
                 <h3>Discover Amazing Projects</h3>
                 <p>Browse thousands of projects posted daily by clients worldwide. Find work that fits your skills and passion.</p>
             </article>
-            <article class="feature" tabindex="0" aria-label="Connect with Top Talent">
+            <article class="feature fade-in">
+                <i class="fas fa-users"></i>
                 <h3>Connect with Top Talent</h3>
-                <p>Build your freelance career by collaborating with expert freelancers and reputable clients in a trusted environment.</p>
+                <p>Collaborate with expert freelancers and reputable clients in a trusted environment.</p>
             </article>
-            <article class="feature" tabindex="0" aria-label="Secure and Transparent">
+            <article class="feature fade-in">
+                <i class="fas fa-lock"></i>
                 <h3>Secure & Transparent</h3>
-                <p>Our secure payment system and transparent ratings keep your freelancing experience safe and fair every step of the way.</p>
+                <p>Our secure payment system and transparent ratings ensure a safe and fair freelancing experience.</p>
             </article>
         </div>
 
-        <section class="call-to-action" aria-label="Ready to Start Your Journey">
+        <section class="call-to-action">
             <h2>Ready to Start Your Journey?</h2>
-            <p>Whether you're a freelancer looking for your next big opportunity or a client searching for the perfect talent, <strong>FreelanceHub</strong> is your go-to platform to make it happen. Join for free, create your profile, and dive into a world of possibilities.</p>
+            <p>Whether you're a freelancer looking for your next big opportunity or a client searching for the perfect talent, <strong>FreelanceHub</strong> is your go-to platform. Join for free, create your profile, and dive into a world of possibilities.</p>
+            <a href="/register" class="cta-button">Join Now</a>
         </section>
     </main>
 
@@ -203,7 +215,3 @@
 
 </body>
 </html>
-
-
-
-
