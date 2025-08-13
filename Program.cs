@@ -48,8 +48,6 @@ builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IFreelancerService, FreelancerService>();
 builder.Services.AddScoped<IJobCategoryService, JobCategoryService>();
 builder.Services.AddScoped<IJobService, JobService>();
-
-// For services without interfaces, register concrete
 builder.Services.AddScoped<IJobSkillService,JobSkillService>();
 builder.Services.AddScoped<IProposalService,ProposalService>();
 

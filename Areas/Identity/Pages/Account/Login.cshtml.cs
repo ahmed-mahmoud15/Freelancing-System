@@ -6,15 +6,16 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+using FreelancingSystem.Service;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using FreelancingSystem.Service;
 
 namespace FreelancingSystem.Areas.Identity.Pages.Account
 {
@@ -123,8 +124,17 @@ namespace FreelancingSystem.Areas.Identity.Pages.Account
 
                     var user = await userManager.FindByEmailAsync(Input.Email);
                     var roles = await userManager.GetRolesAsync(user);
-                    HttpContext.Session.SetInt32("ID", userService.GetUserByIdentity(user.Id).Id);
-                    int? iD = HttpContext.Session.GetInt32("ID");
+                    var claims = await userManager.GetClaimsAsync(user);
+                    int id = userService.GetUserByIdentity(user.Id).Id;
+
+
+                    if (!claims.Any(c => c.Type == "UserId"))
+                    {
+                        await userManager.AddClaimAsync(user, new Claim("UserId", id.ToString()));
+                    }
+                    
+                    
+                    
 
                     if (roles.Contains("Admin"))
                     {
@@ -132,7 +142,7 @@ namespace FreelancingSystem.Areas.Identity.Pages.Account
                     }
                     else if (roles.Contains("Client"))
                     {
-                        return RedirectToAction("Profile", "Client", new { id = iD});
+                        return RedirectToAction("Profile", "Client", new { id = id});
                     }
                     else if (roles.Contains("Freelancer"))
                     {

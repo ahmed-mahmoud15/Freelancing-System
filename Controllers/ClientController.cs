@@ -5,22 +5,24 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System.Threading.Tasks;
+using FreelancingSystem.Service;
+using FreelancingSystem.ViewModel;
 
 namespace FreelancingSystem.Controllers
 {
     public class ClientController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IClientService clientService;
 
-        public ClientController(ApplicationDbContext context)
+        public ClientController(IClientService clientService)
         {
-            _context = context;
+            this.clientService = clientService;
         }
 
         // GET: Client/Profile/1
         public async Task<IActionResult> Profile(int id)
         {
-            var client = await _context.Clients.FirstOrDefaultAsync(c => c.Id == id);
+            var client = clientService.GetClientById(id);
             if (client == null)
             {
                 return NotFound();
@@ -31,35 +33,35 @@ namespace FreelancingSystem.Controllers
         // GET: Client/EditProfile/1
         public async Task<IActionResult> EditProfile(int id)
         {
-            var client = await _context.Clients.FirstOrDefaultAsync(c => c.Id == id);
+            var client = clientService.GetClientById(id);
+            
             if (client == null)
             {
                 return NotFound();
             }
-            return View(client);
+
+            return View(EditClientViewModel.ToEditClient(client));
         }
 
         // POST: Client/EditProfile/1
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditProfile(int id, Client model, IFormFile ProfileImageFile)
+        public async Task<IActionResult> EditProfile(int id, EditClientViewModel model, IFormFile ProfileImageFile)
         {
             if (id != model.Id)
                 return BadRequest();
 
             if (!ModelState.IsValid)
-            {   
+            {
+                ModelState.AddModelError("", ModelState.Values.ToString());
                 return View(model);
             }
 
-            var client = await _context.Clients.FirstOrDefaultAsync(c => c.Id == id);
+            var client = clientService.GetClientById(id);
             if (client == null)
                 return NotFound();
 
-            // Update client details
-            client.FirstName = model.FirstName;
-            client.LastName = model.LastName;
-            client.CompanyName = model.CompanyName;
+            client = EditClientViewModel.ToClient(client, model);
 
             // Handle profile image upload
             if (ProfileImageFile != null && ProfileImageFile.Length > 0)
@@ -78,8 +80,7 @@ namespace FreelancingSystem.Controllers
                 client.ProfileImagePath = "/images/" + fileName;
             }
 
-            _context.Update(client);
-            await _context.SaveChangesAsync();
+            clientService.UpdateClient(client);
 
             TempData["SuccessMessage"] = "Profile updated successfully!";
             return RedirectToAction(nameof(Profile), new { id = client.Id });

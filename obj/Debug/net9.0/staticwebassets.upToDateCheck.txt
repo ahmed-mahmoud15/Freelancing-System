@@ -61,6 +61,7 @@ wwwroot\lib\jquery\dist\jquery.slim.js
 wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\images\7_4540928-hunter-x-hunter-gon-freecss.png
 C:\Users\p c\source\repos\FreelancingSystem\FreelancingSystem\wwwroot\css\site.css
 C:\Users\p c\source\repos\FreelancingSystem\FreelancingSystem\wwwroot\favicon.ico
 C:\Users\p c\source\repos\FreelancingSystem\FreelancingSystem\wwwroot\js\site.js

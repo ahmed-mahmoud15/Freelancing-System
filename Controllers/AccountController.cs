@@ -38,9 +38,10 @@ namespace FreelancingSystem.Controllers
 
             if (success)
             {
-                return model.Role == RoleViewModel.Client
-                    ? RedirectToAction("Dashboard", "Client")
-                    : RedirectToAction("Index", "Home");
+                //return model.Role == RoleViewModel.Client
+                //    ? RedirectToAction("Dashboard", "Client")
+                //    : RedirectToAction("Dashboard", "Freelancer");
+                return RedirectToAction("Login", "Account", new { area = "Identity"});
             }
 
             ModelState.AddModelError("", "Registration failed.");
