@@ -1,0 +1,18 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/bin/Debug/net9.0/FreelancingSystem.dll
+/bin/Debug/net9.0/FreelancingSystem.exe
+/bin/Debug/net9.0/FreelancingSystem.pdb
+/obj/Debug/net9.0/refint/FreelancingSystem.dll
+/obj/Debug/net9.0/ref/FreelancingSystem.dll
+/obj/Debug/net9.0/apphost.exe
+/obj/Debug/net9.0/FreelancingSystem.AssemblyInfo.cs
+/obj/Debug/net9.0/FreelancingSystem.dll
+/obj/Debug/net9.0/FreelancingSystem.AssemblyInfoInputs.cache
+/obj/Debug/net9.0/FreelancingSystem.pdb
+/obj/Debug/net9.0/FreelancingSystem.sourcelink.json
+/obj/Debug/net9.0/rjsmcshtml.dswa.cache.json
+/obj/Debug/net9.0/rjsmrazor.dswa.cache.json
+/obj/Debug/net9.0/rpswa.dswa.cache.json
