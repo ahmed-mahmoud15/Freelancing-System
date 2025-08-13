@@ -39,24 +39,31 @@ namespace FreelancingSystem.Service
             _proposalRepository.Delete(jobId, freelancerId);
         }
 
-        public void ApproveProposal(int jobId, int freelancerId, int clientId)
+        public void ApproveProposal(int jobId, int freelancerId)
         {
             var proposal = _proposalRepository.GetByIds(jobId, freelancerId);
-            if (proposal != null && proposal.Job.ClientId == clientId)
+            if (proposal != null)
             {
                 proposal.Status = Status.Approved;
                 _proposalRepository.Update(proposal);
+                _proposalRepository.Save();
             }
         }
 
-        public void RejectProposal(int jobId, int freelancerId, int clientId)
+        public void RejectProposal(int jobId, int freelancerId)
         {
             var proposal = _proposalRepository.GetByIds(jobId, freelancerId);
-            if (proposal != null && proposal.Job.ClientId == clientId)
+            if (proposal != null)
             {
                 proposal.Status = Status.Rejected;
                 _proposalRepository.Update(proposal);
+                _proposalRepository.Save();
             }
+        }
+
+        public IEnumerable<Proposal> GetAllFreelancersAppliedFor(int jobId)
+        {
+            return _proposalRepository.GetAllByJobId(jobId);
         }
     }
 }

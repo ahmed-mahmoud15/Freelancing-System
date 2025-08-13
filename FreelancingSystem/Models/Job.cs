@@ -24,7 +24,7 @@ namespace FreelancingSystem.Models
 
         public DateTime? Deadline { get; set; }
 
-        public Freelancer Freelancer { get; set; }
+        public Client Client { get; set; }
 
         public ICollection<JobSkill> Skills { get; set; } = new List<JobSkill>();
 

@@ -13,10 +13,9 @@ namespace FreelancingSystem.Models
         [Required]
         public string CoverLetter { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
         public int Bid {  get; set; }
-        public DateTime TimeLine { get; set; }
-        public Status Status { get; set; }
+        public Status? Status { get; set; } = Models.Status.Applied;
         
         public Freelancer Freelancer { get; set; }
         public Job Job { get; set; }

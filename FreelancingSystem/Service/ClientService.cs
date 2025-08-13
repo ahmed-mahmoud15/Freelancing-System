@@ -69,14 +69,5 @@ namespace FreelancingSystem.Service
                 client.ProfileImagePath = "/images/" + fileName;
             }
         }
-
-        // ---------------- Jobs ----------------
-        public void AddJob(Job job)
-        {
-            if (job == null)
-                throw new ArgumentNullException(nameof(job));
-
-            throw new NotImplementedException("Implement AddJob logic with proper repository/service.");
-        }
     }
 }

@@ -6,6 +6,7 @@ namespace FreelancingSystem.Service
     {
         // Job CRUD
         IEnumerable<Job> GetAllJobs();
+        IEnumerable<Job> GetJobsByClinetId(int id);
         Job GetJobById(int id);
         void AddJob(Job job);
         void UpdateJob(Job job);

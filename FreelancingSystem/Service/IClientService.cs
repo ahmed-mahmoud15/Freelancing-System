@@ -11,8 +11,5 @@ namespace FreelancingSystem.Service
         void AddClient(Client client, IFormFile file);
         void UpdateClient(Client client, IFormFile file);
         void DeleteClient(int id);
-
-        // Jobs
-        void AddJob(Job job);
     }
 }

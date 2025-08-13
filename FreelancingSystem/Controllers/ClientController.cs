@@ -10,10 +10,64 @@ namespace FreelancingSystem.Controllers
     public class ClientController : Controller
     {
         private readonly IClientService clientService;
+        private readonly IJobService jobService;
+        private readonly IProposalService proposalService;
 
-        public ClientController(IClientService clientService)
+        public ClientController(IClientService clientService, IJobService jobService, IProposalService proposalService)
         {
             this.clientService = clientService;
+            this.jobService = jobService;
+            this.proposalService = proposalService;
+        }
+
+        public IActionResult JobDetails(int id)
+        {
+            var result = proposalService.GetAllFreelancersAppliedFor(id)
+                .Select(e => new ShowFreelancerProposalViewModel()
+                {
+                    Id = e.FreelancerId,
+                    JobId = e.JobId,
+                    Name = e.Freelancer.FirstName + " " + e.Freelancer.LastName,
+                    Bid = e.Bid,
+                    CoverLetter = e.CoverLetter,
+                    Status = e.Status.GetValueOrDefault()
+                });
+            return View(result);
+        }
+
+        public IActionResult Hire(int jobId, int freelancerId)
+        {
+            proposalService.ApproveProposal(jobId, freelancerId);
+            return RedirectToAction("JobDetails", new {id = jobId});
+        }
+
+        public IActionResult Reject(int jobId, int freelancerId)
+        {
+            proposalService.RejectProposal(jobId, freelancerId);
+            return RedirectToAction("JobDetails", new { id = jobId });
+        }
+        public IActionResult AddJob()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddJob(AddJobViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            Job job = new Job()
+            {
+                ClientId = int.Parse(User.FindFirst("UserId")?.Value),
+                CreatedAt = DateTime.Now,
+                Title = model.Name,
+                Description = model.Description,
+                Budget = model.Budget
+            };
+            jobService.AddJob(job);
+            return RedirectToAction(nameof(Profile), new { id = User.FindFirst("UserId").Value });
         }
 
         // GET: Client/Profile/1
@@ -24,7 +78,25 @@ namespace FreelancingSystem.Controllers
             {
                 return NotFound();
             }
-            return View(client);
+            var jobsByClient = jobService.GetJobsByClinetId(id)
+                .Select(x => new ShowJobViewModel()
+                {
+                    Name = x.Title,
+                    Id = x.Id,
+                    Budget = x.Budget,
+                    CreatedAt = x.CreatedAt,
+                    Description = x.Description
+                });
+
+            ClientProfileViewModel profile = new ClientProfileViewModel()
+            {
+                Id = id,
+                Name = client.FirstName + " " + client.LastName,
+                Company = client.CompanyName,
+                PhotoPath = client.ProfileImagePath,
+                Jobs = jobsByClient
+            };
+            return View(profile);
         }
 
         // GET: Client/EditProfile/1

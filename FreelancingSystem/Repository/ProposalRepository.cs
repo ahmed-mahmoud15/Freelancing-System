@@ -54,5 +54,10 @@ namespace FreelancingSystem.Repository
         {
             context.SaveChanges();
         }
+
+        public IEnumerable<Proposal> GetAllByJobId(int jobId)
+        {
+            return context.Proposals.Where(x => x.JobId == jobId).Include(x => x.Freelancer).ToList();
+        }
     }
 }

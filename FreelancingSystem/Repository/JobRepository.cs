@@ -1,5 +1,6 @@
 ﻿using FreelancingSystem.Data;
 using FreelancingSystem.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FreelancingSystem.Repository
 {
@@ -8,9 +9,9 @@ namespace FreelancingSystem.Repository
 
         public JobRepository(ApplicationDbContext context) : base(context) { }
 
-        public Job GetJobById(string id)
+        public IEnumerable<Job> GetJobsByClientId(int id)
         {
-            return table.FirstOrDefault(e => e.Id.Equals(id));
+            return context.Jobs.Where(x => x.ClientId == id).Include(x => x.Client).ToList();
         }
     }
 }

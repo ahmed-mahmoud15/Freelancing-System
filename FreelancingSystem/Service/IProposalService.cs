@@ -10,6 +10,8 @@ namespace FreelancingSystem.Service
         // Updated to use composite key
         Proposal GetProposalById(int jobId, int freelancerId);
 
+        IEnumerable<Proposal> GetAllFreelancersAppliedFor(int jobId);
+
         void AddProposal(Proposal proposal);
 
         void UpdateProposal(Proposal proposal);
@@ -18,9 +20,9 @@ namespace FreelancingSystem.Service
         void DeleteProposal(int jobId, int freelancerId);
 
         // Updated to use composite key
-        void ApproveProposal(int jobId, int freelancerId, int clientId);
+        void ApproveProposal(int jobId, int freelancerId);
 
         // Updated to use composite key
-        void RejectProposal(int jobId, int freelancerId, int clientId);
+        void RejectProposal(int jobId, int freelancerId);
     }
 }
