@@ -1,0 +1,26 @@
+﻿@model FreelancingSystem.Models.Client
+@{
+    ViewData["Title"] = "Client Profile";
+}
+
+<div class="container mt-4">
+    <h2>@Model.FirstName @Model.LastName</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-4">
+            <img src="@Model.ProfileImagePath" class="img-thumbnail" style="max-width: 100%;" />
+        </div>
+        <div class="col-md-8">
+            <dl class="row">
+                <dt class="col-sm-3">Company Name</dt>
+                <dd class="col-sm-9">@Model.CompanyName</dd>
+
+                <dt class="col-sm-3">Identity ID</dt>
+                <dd class="col-sm-9">@Model.IdentityId</dd>
+            </dl>
+
+            <a asp-action="EditProfile" asp-route-id="@Model.Id" class="btn btn-primary">Edit Profile</a>
+        </div>
+    </div>
+</div>

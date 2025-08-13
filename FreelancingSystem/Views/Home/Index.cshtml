@@ -1,0 +1,209 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background: #f8f9fa;
+            color: #88e7e1;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #e9ecef;
+            padding: 60px 20px 40px;
+            text-align: center;
+            border-bottom: 2px solid #dee2e6;
+            box-shadow: 0 2px 5px rgb(0 0 0 / 0.05);
+        }
+
+            header h1 {
+                font-size: 3.2rem;
+                margin-bottom: 12px;
+                font-weight: 700;
+                color: #062040;
+                letter-spacing: 2px;
+                user-select: none;
+            }
+
+            header p {
+                font-size: 1.3rem;
+                max-width: 640px;
+                margin: 0 auto;
+                color: #21277f;
+                font-weight: 400;
+                letter-spacing: 0.5px;
+                user-select: none;
+            }
+
+        main {
+            max-width: 1080px;
+            margin: 40px auto 80px;
+            padding: 0 20px;
+        }
+
+        h2.section-title {
+            font-weight: 700;
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #1b0665;
+            letter-spacing: 1.1px;
+            user-select: none;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .feature {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgb(0 0 0 / 0.07), 0 8px 20px rgb(0 0 0 / 0.06);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            cursor: default;
+            user-select: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .feature::before {
+                content: "";
+                position: absolute;
+                top: -60%;
+                left: -60%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle at center, #2575fc99, transparent 70%);
+                opacity: 0;
+                transition: opacity 0.35s ease;
+                z-index: 0;
+                border-radius: 50%;
+            }
+
+            .feature:hover::before {
+                opacity: 1;
+            }
+
+            .feature:hover {
+                transform: translateY(-12px);
+                box-shadow: 0 12px 30px rgb(37 117 252 / 0.3), 0 6px 20px rgb(37 117 252 / 0.2);
+                z-index: 1;
+            }
+
+            .feature h3 {
+                color: #2575fc;
+                margin-bottom: 18px;
+                font-size: 1.6rem;
+                position: relative;
+                z-index: 2;
+            }
+
+            .feature p {
+                color: #495057;
+                font-weight: 400;
+                line-height: 1.5;
+                font-size: 1rem;
+                position: relative;
+                z-index: 2;
+            }
+
+        section.call-to-action {
+            text-align: center;
+            max-width: 700px;
+            margin: 80px auto 0;
+            color: #212529;
+            user-select: none;
+        }
+
+            section.call-to-action h2 {
+                font-weight: 700;
+                font-size: 2.4rem;
+                margin-bottom: 18px;
+                letter-spacing: 1px;
+            }
+
+            section.call-to-action p {
+                font-size: 1.1rem;
+                line-height: 1.6;
+                color: #495057;
+                max-width: 600px;
+                margin: 0 auto;
+                font-weight: 400;
+            }
+
+        footer {
+            text-align: center;
+            padding: 30px 15px;
+            font-size: 0.9rem;
+            color: #868e96;
+            background: #e9ecef;
+            user-select: none;
+            border-top: 1px solid #dee2e6;
+            letter-spacing: 0.05em;
+        }
+
+        /* Subtle hover effect on header text for interactive feel */
+        header h1:hover {
+            color: #2575fc;
+            transition: color 0.4s ease;
+        }
+
+        header p:hover {
+            color: #495057cc;
+            transition: color 0.4s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Welcome to FreelanceHub</h1>
+        <p>Your ultimate platform to connect, create, and conquer the freelancing world — absolutely free!</p>
+    </header>
+
+    <main>
+        <h2 class="section-title">Why Choose FreelanceHub?</h2>
+        <div class="features">
+            <article class="feature" tabindex="0" aria-label="Discover Amazing Projects">
+                <h3>Discover Amazing Projects</h3>
+                <p>Browse thousands of projects posted daily by clients worldwide. Find work that fits your skills and passion.</p>
+            </article>
+            <article class="feature" tabindex="0" aria-label="Connect with Top Talent">
+                <h3>Connect with Top Talent</h3>
+                <p>Build your freelance career by collaborating with expert freelancers and reputable clients in a trusted environment.</p>
+            </article>
+            <article class="feature" tabindex="0" aria-label="Secure and Transparent">
+                <h3>Secure & Transparent</h3>
+                <p>Our secure payment system and transparent ratings keep your freelancing experience safe and fair every step of the way.</p>
+            </article>
+        </div>
+
+        <section class="call-to-action" aria-label="Ready to Start Your Journey">
+            <h2>Ready to Start Your Journey?</h2>
+            <p>Whether you're a freelancer looking for your next big opportunity or a client searching for the perfect talent, <strong>FreelanceHub</strong> is your go-to platform to make it happen. Join for free, create your profile, and dive into a world of possibilities.</p>
+        </section>
+    </main>
+
+    <footer>
+        &copy; @DateTime.Now.Year FreelanceHub. All rights reserved.
+    </footer>
+
+</body>
+</html>
+
+
+
+
