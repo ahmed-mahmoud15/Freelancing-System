@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/FreelancingSystem
+/obj/Release/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+/obj/Release/net9.0/FreelancingSystem.AssemblyInfo.cs
+/obj/Release/net9.0/FreelancingSystem.AssemblyInfoInputs.cache
+/obj/Release/net9.0/FreelancingSystem.assets.cache
+/obj/Release/net9.0/FreelancingSystem.csproj.AssemblyReference.cache
+/obj/Release/net9.0/FreelancingSystem.GeneratedMSBuildEditorConfig.editorconfig
+/obj/Release/net9.0/FreelancingSystem.GlobalUsings.g.cs
+/obj/Release/net9.0/FreelancingSystem.RazorAssemblyInfo.cache
+/obj/Release/net9.0/FreelancingSystem.RazorAssemblyInfo.cs
