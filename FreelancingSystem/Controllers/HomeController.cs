@@ -38,5 +38,10 @@ namespace FreelancingSystem.Controllers
             return View();
         }
 
+        public IActionResult Test3()
+        {
+            return View();
+        }
+
     }
 }
