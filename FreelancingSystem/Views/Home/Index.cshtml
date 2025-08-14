@@ -19,40 +19,41 @@
             line-height: 1.6;
         }
 
-        /* NAVBAR / HEADER */
+        /* HEADER */
         header {
             background: #F0FCFC;
             padding: 60px 20px 40px;
             text-align: center;
             border-bottom: 2px solid #dee2e6;
-            box-shadow: 0 4px 20px rgba(37,117,252,0.15); /* soft blue shadow */
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(37,117,252,0.15);
         }
 
             header h1 {
-                font-size: 3.2rem;
+                font-size: 3rem;
                 margin-bottom: 12px;
                 font-weight: 700;
                 color: #062040;
-                letter-spacing: 2px;
-                transition: color 0.4s ease;
+                letter-spacing: 1.5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
             }
 
+                header h1 i {
+                    color: #2575fc;
+                    filter: drop-shadow(0 3px 4px rgba(37,117,252,0.3));
+                }
+
             header p {
-                font-size: 1.3rem;
+                font-size: 1.25rem;
                 max-width: 640px;
                 margin: 0 auto;
                 color: #21277f;
                 font-weight: 400;
-                letter-spacing: 0.5px;
-                transition: color 0.4s ease;
             }
 
-            header h1:hover { color: #2575fc; }
-            header p:hover { color: #495057cc; }
-
+        /* MAIN */
         main {
             max-width: 1080px;
             margin: 40px auto 80px;
@@ -61,11 +62,10 @@
 
         h2.section-title {
             font-weight: 700;
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             margin-bottom: 40px;
             text-align: center;
             color: #1b0665;
-            letter-spacing: 1.1px;
         }
 
         /* FEATURES GRID */
@@ -79,13 +79,13 @@
             background: white;
             padding: 30px 25px;
             border-radius: 15px;
-            box-shadow: 0 8px 18px rgba(37,117,252,0.15), 0 4px 10px rgba(0,0,0,0.05); /* colored shadow */
+            box-shadow: 0 8px 18px rgba(37,117,252,0.15), 0 4px 10px rgba(0,0,0,0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-align: center;
         }
 
             .feature:hover {
-                transform: translateY(-8px);
+                transform: translateY(-6px);
                 box-shadow: 0 12px 28px rgba(37,117,252,0.25), 0 6px 20px rgba(0,0,0,0.08);
             }
 
@@ -93,7 +93,7 @@
                 font-size: 2.5rem;
                 color: #2575fc;
                 margin-bottom: 15px;
-                filter: drop-shadow(0 3px 5px rgba(37,117,252,0.3)); /* icon shadow */
+                filter: drop-shadow(0 3px 5px rgba(37,117,252,0.3));
             }
 
             .feature h3 {
@@ -129,23 +129,6 @@
                 margin: 0 auto 20px;
             }
 
-        .cta-button {
-            display: inline-block;
-            background: #2575fc;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 5px 12px rgba(37,117,252,0.3);
-        }
-
-            .cta-button:hover {
-                background: #1a5fd8;
-                box-shadow: 0 8px 20px rgba(37,117,252,0.4);
-            }
-
         /* FOOTER */
         footer {
             text-align: center;
@@ -163,9 +146,17 @@
             animation: fadeInUp 0.6s forwards;
         }
 
-            .fade-in:nth-child(1) { animation-delay: 0.2s; }
-            .fade-in:nth-child(2) { animation-delay: 0.4s; }
-            .fade-in:nth-child(3) { animation-delay: 0.6s; }
+            .fade-in:nth-child(1) {
+                animation-delay: 0.2s;
+            }
+
+            .fade-in:nth-child(2) {
+                animation-delay: 0.4s;
+            }
+
+            .fade-in:nth-child(3) {
+                animation-delay: 0.6s;
+            }
 
         @@keyframes fadeInUp {
             to {
@@ -178,7 +169,9 @@
 <body>
 
     <header>
-        <h1>Welcome to FreelanceHub</h1>
+        <h1>
+            <i class="fas fa-laptop-code"></i> Welcome to FreelanceHub
+        </h1>
         <p>We’re Ahmed Mahmoud, Malak Mashaly, and Sara Ashraf — here to help freelancers find quality job opportunities and grow their careers.</p>
     </header>
 
@@ -204,8 +197,7 @@
 
         <section class="call-to-action">
             <h2>Ready to Start Your Journey?</h2>
-            <p>Whether you're a freelancer looking for your next big opportunity or a client searching for the perfect talent, <strong>FreelanceHub</strong> is your go-to platform. Join for free, create your profile, and dive into a world of possibilities.</p>
-            <a href="/register" class="cta-button">Join Now</a>
+            <p>Whether you're a freelancer looking for your next big opportunity or a client searching for the perfect talent, <strong>FreelanceHub</strong> is your go-to platform. Create your profile and dive into a world of possibilities.</p>
         </section>
     </main>
 

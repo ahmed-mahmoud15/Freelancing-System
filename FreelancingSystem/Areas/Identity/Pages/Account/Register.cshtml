@@ -4,60 +4,152 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
+<!-- Font Awesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-<div class="row">
+<style>
+    h1 {
+        font-weight: 600;
+        color: #1e2a38;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    h2, h3 {
+        font-weight: 500;
+        color: #2f3b4c;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Inputs */
+    .form-control {
+        font-weight: 500;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        transition: all 0.25s ease;
+    }
+
+        .form-control:focus {
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-color: #3a7bd5;
+            transform: translateY(-1px);
+        }
+
+    /* Buttons */
+    .btn-primary {
+        font-weight: 500;
+        border-radius: 6px;
+        background-color: #3a7bd5;
+        border-color: #3a7bd5;
+        transition: all 0.25s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #316cbf;
+            border-color: #316cbf;
+            box-shadow: 0 3px 8px rgba(58,123,213,0.3);
+            transform: translateY(-1px);
+        }
+
+    /* Links */
+    a {
+        color: #3a7bd5;
+        transition: color 0.25s ease;
+    }
+
+        a:hover {
+            color: #2a5ea0;
+            text-decoration: underline;
+        }
+
+    /* Animation */
+    @@keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    .fade-in {
+        animation: fadeIn 0.3s ease-in-out;
+    }
+</style>
+
+<h1 class="fade-in"><i class="fas fa-user-plus" style="color:#3a7bd5;"></i> @ViewData["Title"]</h1>
+
+<div class="row fade-in">
     <div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Create a new account.</h2>
+            <h2><i class="fas fa-id-card" style="color:#3a7bd5;"></i> Create a new account</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
             <div class="form-floating mb-3">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                <label asp-for="Input.Email">Email</label>
+                <label asp-for="Input.Email"><i class="fas fa-envelope"></i> Email</label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
+
             <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.Password">Password</label>
+                <input asp-for="Input.Password" type="password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.Password"><i class="fas fa-lock"></i> Password</label>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
+
             <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                <input asp-for="Input.ConfirmPassword" type="password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.ConfirmPassword"><i class="fas fa-lock"></i> Confirm Password</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">
+                <i class="fas fa-user-check"></i> Register
+            </button>
         </form>
     </div>
+
     <div class="col-md-6 col-md-offset-2">
         <section>
-            <h3>Use another service to register.</h3>
+            <h3><i class="fas fa-globe"></i> Use another service to register</h3>
             <hr />
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
-                <div>
-                    <p>
-                        There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
-                            article
-                            about setting up this ASP.NET application to support logging in via external services
-                        </a>.
-                    </p>
-                </div>
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                article about setting up this ASP.NET application to support logging in via external services
+                            </a>.
+                        </p>
+                    </div>
                 }
                 else
                 {
-                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                    <div>
-                        <p>
-                            @foreach (var provider in Model.ExternalLogins!)
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins!)
                                 {
-                            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Register using your @provider.DisplayName account">
+                                        <i class="fas fa-right-to-bracket"></i> @provider.DisplayName
+                                    </button>
                                 }
-                        </p>
-                    </div>
-                </form>
+                            </p>
+                        </div>
+                    </form>
                 }
             }
         </section>

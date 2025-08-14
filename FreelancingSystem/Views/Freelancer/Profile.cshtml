@@ -4,30 +4,95 @@
     ViewData["Title"] = "Profile";
 }
 
-<div class="container mt-4">
+<style>
+    /* General Page Styling */
+    .profile-container h2, .profile-container h3, .profile-container h4 {
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .profile-container p {
+        font-weight: 500;
+    }
+
+    /* Profile Image */
+    .profile-image {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        max-width: 100%;
+    }
+
+    /* Buttons */
+    .btn-custom {
+        font-weight: 600;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        transition: transform 0.15s ease-in-out;
+    }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+        }
+
+    /* Professional Table */
+    table.professional-table {
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); /* Darker shadow */
+        border: 1.5px solid #0d6efd; /* Clean outline */
+        width: 100%;
+    }
+
+        table.professional-table th,
+        table.professional-table td {
+            border: 1px solid #dee2e6;
+            font-weight: 500;
+        }
+
+        table.professional-table thead {
+            background-color: #0d6efd;
+            color: white;
+            font-weight: bold;
+        }
+
+        table.professional-table tbody tr:hover {
+            background-color: rgba(13, 110, 253, 0.08);
+            transition: background-color 0.2s ease-in-out;
+        }
+</style>
+
+<div class="container mt-4 profile-container">
     <div class="row mb-4">
         <div class="col-md-3">
             @if (!string.IsNullOrEmpty(Model.PhotoPath))
             {
-                <img src="@Url.Content(Model.PhotoPath)" alt="@Model.Name" class="img-fluid border" />
+                <img src="@Url.Content(Model.PhotoPath)" alt="@Model.Name" class="profile-image border" />
             }
             else
             {
-                <img src="~/images/default-profile.png" alt="Default Profile" class="img-fluid rounded-circle border" />
+                <img src="~/images/default-profile.png" alt="Default Profile" class="profile-image border" />
             }
         </div>
         <div class="col-md-9">
-            <h2>@Model.Name</h2>
-            <p>@Model.Bio</p>
-            <a asp-action="EditProfile" asp-route-id="@Model.Id" class="btn btn-primary">Edit Profile</a>
+            <h2><i class="fas fa-user"></i> @Model.Name</h2>
+            <p><i class="fas fa-info-circle"></i> @Model.Bio</p>
 
-            <a asp-action="JobSearch" class="btn btn-info">Browse Jobs</a>
+            <a asp-action="EditProfile" asp-route-id="@Model.Id" class="btn btn-primary btn-custom me-2">
+                <i class="fas fa-edit"></i> Edit Profile
+            </a>
+
+            <a asp-action="JobSearch" class="btn btn-info btn-custom">
+                <i class="fas fa-search"></i> Browse Jobs
+            </a>
         </div>
     </div>
 
     <hr />
 
-    <h3>My Proposals</h3>
+    <h3><i class="fas fa-file-alt"></i> My Proposals</h3>
 
     @if (Model.Proposals != null && Model.Proposals.Any())
     {
@@ -36,13 +101,13 @@
         foreach (var group in groupedProposals)
         {
             <div class="mb-4">
-                <h4 class="text-capitalize">@group.Key.ToString()</h4>
-                <table class="table table-striped table-bordered">
+                <h4 class="text-capitalize"><i class="fas fa-folder"></i> @group.Key.ToString()</h4>
+                <table class="table professional-table">
                     <thead>
                         <tr>
-                            <th>Job Title</th>
-                            <th>Bid</th>
-                            <th>View Job</th>
+                            <th><i class="fas fa-briefcase"></i> Job Title</th>
+                            <th><i class="fas fa-dollar-sign"></i> Bid</th>
+                            <th><i class="fas fa-eye"></i> View Job</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,8 +117,10 @@
                                 <td>@proposal.Name</td>
                                 <td>@proposal.Bid</td>
                                 <td>
-                                    <a asp-controller="Freelancer" asp-action="ProposalDetails" asp-route-freelancerId="@Model.Id" asp-route-jobId="@proposal.JobId" class="btn btn-info btn-sm">
-                                        View
+                                    <a asp-controller="Freelancer" asp-action="ProposalDetails"
+                                       asp-route-freelancerId="@Model.Id" asp-route-jobId="@proposal.JobId"
+                                       class="btn btn-info btn-sm btn-custom">
+                                        <i class="fas fa-eye"></i> View
                                     </a>
                                 </td>
                             </tr>
@@ -68,3 +135,6 @@
         <p>No proposals submitted yet.</p>
     }
 </div>
+
+<!-- Font Awesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />

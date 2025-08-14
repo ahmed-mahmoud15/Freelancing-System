@@ -4,12 +4,14 @@
     ViewData["Title"] = "JobSearch";
 }
 
-<h1 class="mb-4">Job Search</h1>
+<h1 class="mb-4 fw-bold">
+    <i class="fas fa-search text-dark"></i> Job Search
+</h1>
 
 @if (Model == null || !Model.Any())
 {
-    <div class="alert alert-warning text-center" role="alert">
-        No more jobs to apply for.
+    <div class="alert alert-warning text-center shadow-sm" role="alert">
+        <i class="fas fa-exclamation-circle"></i> No more jobs to apply for.
     </div>
 }
 else
@@ -18,21 +20,52 @@ else
         @foreach (var item in Model)
         {
             <div class="col">
-                <div class="card h-100 shadow-sm border-0">
+                <div class="card h-100 shadow-lg border border-dark rounded-3 job-card">
                     <div class="card-body">
-                        <h5 class="card-title">@item.Name</h5>
-                        <p class="card-text text-muted">@item.Description</p>
-                        <p class="mb-1"><strong>Budget:</strong> @item.Budget</p>
-                        <p class="mb-2"><small class="text-muted">Posted on @item.CreatedAt.ToString("yyyy-MM-dd")</small></p>
+                        <h5 class="card-title fw-bold">
+                            <i class="fas fa-briefcase text-primary"></i> @item.Name
+                        </h5>
+                        <p class="card-text text-muted">
+                            <i class="fas fa-align-left"></i> @item.Description
+                        </p>
+                        <p class="mb-1 fw-semibold">
+                            <i class="fas fa-dollar-sign text-success"></i> Budget: @item.Budget
+                        </p>
+                        <p class="mb-2 text-muted small">
+                            <i class="fas fa-calendar-alt text-info"></i> Posted on @item.CreatedAt.ToString("yyyy-MM-dd")
+                        </p>
                         <a asp-action="Apply"
                            asp-route-freelancerId="@int.Parse(User.FindFirst("UserId").Value)"
                            asp-route-jobId="@item.Id"
-                           class="btn btn-primary">
-                            Apply
+                           class="btn btn-primary w-100 fw-bold apply-btn">
+                            <i class="fas fa-paper-plane"></i> Apply
                         </a>
                     </div>
                 </div>
             </div>
         }
     </div>
+}
+
+@section Scripts {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        .job-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+            .job-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            }
+
+        .apply-btn {
+            transition: background-color 0.2s ease-in-out;
+        }
+
+            .apply-btn:hover {
+                background-color: #0b5ed7;
+            }
+    </style>
 }

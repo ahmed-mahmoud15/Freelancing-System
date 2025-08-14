@@ -1,52 +1,80 @@
 ﻿@model FreelancingSystem.Models.Proposal
 
 @{
-    ViewData["Title"] = "ProposalDetails";
+    ViewData["Title"] = "Proposal Details";
 }
 
-<h1>ProposalDetails</h1>
+<h1 class="mb-4 fw-bold">
+    <i class="fas fa-file-contract text-primary"></i> Proposal Details
+</h1>
 
-<div>
-    <h4>Proposal</h4>
+<div class="card shadow-lg border-0 rounded-3 p-4">
+    <h4 class="fw-bold mb-3">
+        <i class="fas fa-clipboard-list text-info"></i> Proposal Information
+    </h4>
     <hr />
+
     <dl class="row">
-        @* <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.JobId)
+        <dt class="col-sm-3 fw-bold">
+            <i class="fas fa-calendar-alt text-warning"></i> Date
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.JobId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FreelancerId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FreelancerId)
-        </dd> *@
-        
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.Date)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Bid)
+
+        <dt class="col-sm-3 fw-bold">
+            <i class="fas fa-dollar-sign text-success"></i> Bid
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.Bid)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
+
+        <dt class="col-sm-3 fw-bold">
+            <i class="fas fa-info-circle text-primary"></i> Status
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.Status)
         </dd>
 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CoverLetter)
+        <dt class="col-sm-3 fw-bold">
+            <i class="fas fa-file-alt text-secondary"></i> Cover Letter
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.CoverLetter)
         </dd>
     </dl>
 </div>
+
+@*<div class="mt-4">
+    <a asp-action="Index" class="btn btn-dark shadow-sm">
+        <i class="fas fa-arrow-left"></i> Back to List
+    </a>
+</div>*@
+<button type="button" class="btn btn-secondary" onclick="history.back()">
+    <i class="fas fa-arrow-left icon-back"></i> Back to List
+</button>
+
+@section Scripts {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        dl dt {
+            background-color: #f8f9fa;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        dl dd {
+            padding: 8px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .card {
+            transition: box-shadow 0.2s ease-in-out;
+        }
+
+            .card:hover {
+                box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+            }
+    </style>
+}
