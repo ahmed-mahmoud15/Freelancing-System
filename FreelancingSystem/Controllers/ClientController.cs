@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FreelancingSystem.Controllers
 {
-    //[Authorize(Roles = "Client")]
+    [Authorize(Roles = "Client")]
     public class ClientController : Controller
     {
         private readonly IClientService clientService;

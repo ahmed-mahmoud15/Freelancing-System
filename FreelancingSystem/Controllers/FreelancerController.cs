@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FreelancingSystem.Controllers
 {
-    //[Authorize(Roles = "Freelnacer")]
+    [Authorize(Roles = "Freelancer")]
     public class FreelancerController : Controller
     {
         private readonly IFreelancerService freelancerService;
