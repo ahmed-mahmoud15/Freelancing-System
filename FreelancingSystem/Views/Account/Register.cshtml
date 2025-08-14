@@ -4,68 +4,68 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>Register</h1>
-
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Register" enctype="multipart/form-data">
-            <div asp-validation-summary="All" class="text-danger"></div>
-
-            <div class="form-group">
-                <label asp-for="FirstName"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="LastName"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mb-3">
-                <label asp-for="PhotoPath"></label>
-                <input type="file" name="ProfileImageFile" class="form-control" />
-                <span asp-validation-for="PhotoPath"></span>
-            </div>
-
-            <!-- Role Selection -->
-            <div class="form-group">
-                <label>Role</label>
-                <div>
-                    <input type="radio" asp-for="Role" value="Freelancer" id="roleFreelancer" />
-                    <label for="roleFreelancer">Freelancer</label>
-
-                    <input type="radio" asp-for="Role" value="Client" id="roleClient" />
-                    <label for="roleClient">Client</label>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="mb-0">Register</h3>
                 </div>
-                <span asp-validation-for="Role" class="text-danger"></span>
-            </div>
+                <div class="card-body">
+                    <form asp-action="Register" enctype="multipart/form-data">
+                        <div asp-validation-summary="All" class="alert alert-danger" role="alert"></div>
 
-            <!-- Freelancer Bio -->
-            <div class="form-group" id="freelancerBioGroup" style="display:none;">
-                <label asp-for="FreelancerBio"></label>
-                <input asp-for="FreelancerBio" class="form-control" />
-                <span asp-validation-for="FreelancerBio" class="text-danger"></span>
-            </div>
+                        <div class="mb-3">
+                            <label asp-for="FirstName" class="form-label"></label>
+                            <input asp-for="FirstName" class="form-control" placeholder="Enter your first name" />
+                            <span asp-validation-for="FirstName" class="text-danger small"></span>
+                        </div>
 
-            <!-- Client Company Name -->
-            <div class="form-group" id="clientCompanyGroup" style="display:none;">
-                <label asp-for="ClientCompanyName"></label>
-                <input asp-for="ClientCompanyName" class="form-control" />
-                <span asp-validation-for="ClientCompanyName" class="text-danger"></span>
-            </div>
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="form-label"></label>
+                            <input asp-for="LastName" class="form-control" placeholder="Enter your last name" />
+                            <span asp-validation-for="LastName" class="text-danger small"></span>
+                        </div>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                        <div class="mb-3">
+                            <label asp-for="PhotoPath" class="form-label">Profile Photo</label>
+                            <input type="file" name="ProfileImageFile" class="form-control" />
+                            <span asp-validation-for="PhotoPath" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Role</label>
+                            <div class="form-check">
+                                <input type="radio" asp-for="Role" value="Freelancer" id="roleFreelancer" class="form-check-input" />
+                                <label for="roleFreelancer" class="form-check-label">Freelancer</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" asp-for="Role" value="Client" id="roleClient" class="form-check-input" />
+                                <label for="roleClient" class="form-check-label">Client</label>
+                            </div>
+                            <span asp-validation-for="Role" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3" id="freelancerBioGroup" style="display:none;">
+                            <label asp-for="FreelancerBio" class="form-label"></label>
+                            <textarea asp-for="FreelancerBio" class="form-control" rows="3" placeholder="Tell us about your skills"></textarea>
+                            <span asp-validation-for="FreelancerBio" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3" id="clientCompanyGroup" style="display:none;">
+                            <label asp-for="ClientCompanyName" class="form-label"></label>
+                            <input asp-for="ClientCompanyName" class="form-control" placeholder="Enter your company name" />
+                            <span asp-validation-for="ClientCompanyName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Create Account</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
@@ -86,11 +86,11 @@
                 if (roleFreelancer.checked) {
                     freelancerBioGroup.style.display = "block";
                     clientCompanyGroup.style.display = "none";
-                    clientCompanyInput.value = ""; // reset company name
+                    clientCompanyInput.value = "";
                 } else if (roleClient.checked) {
                     freelancerBioGroup.style.display = "none";
                     clientCompanyGroup.style.display = "block";
-                    freelancerBioInput.value = ""; // reset bio
+                    freelancerBioInput.value = "";
                 } else {
                     freelancerBioGroup.style.display = "none";
                     clientCompanyGroup.style.display = "none";

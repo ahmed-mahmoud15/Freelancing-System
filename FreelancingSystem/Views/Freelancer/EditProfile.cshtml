@@ -53,7 +53,7 @@
         <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group mb-3">
+            <div class="form-group mb-3" hidden>
                 <label asp-for="Id"><i class="fas fa-key"></i> ID</label>
                 <input asp-for="Id" class="form-control" />
                 <span asp-validation-for="Id" class="text-danger"></span>

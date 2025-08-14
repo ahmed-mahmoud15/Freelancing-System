@@ -1,10 +1,13 @@
-﻿using FreelancingSystem.Models;
+﻿using System.Security.Claims;
+using FreelancingSystem.Models;
 using FreelancingSystem.Service;
 using FreelancingSystem.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FreelancingSystem.Controllers
 {
+    //[Authorize(Roles = "Freelnacer")]
     public class FreelancerController : Controller
     {
         private readonly IFreelancerService freelancerService;
@@ -66,8 +69,20 @@ namespace FreelancingSystem.Controllers
             return View(proposal);
         }
 
+        
         public IActionResult Profile(int id)
         {
+            if (!int.TryParse(User.FindFirst("UserId")?.Value, out var loggedInUserId))
+            {
+                return Unauthorized();
+            }
+
+            // If the ID in the URL does not match the logged-in user's ID → Unauthorized
+            if (id != loggedInUserId)
+            {
+                return Unauthorized();
+            }
+
             var freelancer = freelancerService.GetFreelancerById(id);
             if (freelancer == null) { 
                 return NotFound();

@@ -133,7 +133,8 @@ namespace FreelancingSystem.Areas.Identity.Pages.Account
                         await userManager.AddClaimAsync(user, new Claim("UserId", id.ToString()));
                     }
 
-
+                    // Re-sign in so the new claim is in the cookie immediately
+                    await _signInManager.SignInAsync(user, Input.RememberMe);
 
 
                     if (roles.Contains("Admin"))

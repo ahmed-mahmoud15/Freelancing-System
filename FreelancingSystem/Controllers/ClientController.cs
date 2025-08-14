@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using FreelancingSystem.Service;
 using FreelancingSystem.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FreelancingSystem.Controllers
 {
+    //[Authorize(Roles = "Client")]
     public class ClientController : Controller
     {
         private readonly IClientService clientService;
@@ -73,6 +75,17 @@ namespace FreelancingSystem.Controllers
         // GET: Client/Profile/1
         public async Task<IActionResult> Profile(int id)
         {
+            if (!int.TryParse(User.FindFirst("UserId")?.Value, out var loggedInUserId))
+            {
+                return Unauthorized();
+            }
+
+            // If the ID in the URL does not match the logged-in user's ID → Unauthorized
+            if (id != loggedInUserId)
+            {
+                return Unauthorized();
+            }
+
             var client = clientService.GetClientById(id);
             if (client == null)
             {
